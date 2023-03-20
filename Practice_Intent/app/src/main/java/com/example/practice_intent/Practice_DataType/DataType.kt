@@ -5,6 +5,7 @@ fun main() {
     practiceVar()
     practiceDataType1() //숫자형
     practiceDataType2() //문자형
+    practiceLateinit() //늦은 초기화 , 지연 초기화
 }
 
 fun practiceVal() {
@@ -67,6 +68,36 @@ fun practiceDataType1() {
 }
 
 fun practiceDataType2() {
-    
+    //Char은 외따옴표로 감싸서 저장
+    var charValue = 'A'
+
+    // String 여러개의 문자 저장
+    var stringValue = "안녕하세요"
+
+    // Boolean true , false 두가지 값
+    var booleanValue = true
+}
+
+fun practiceLateinit() {
+    // 참조 초기화를 늦추기 위해서는 var를 사용할 수 밖에 없지만, 일단 참조를 초기화해 값이 정해진 다음부터는 변경을 막고 싶을 때가 있습니다.
+    // 그 중 가장 흔한 경우는 초기화에 비용이 많이 들어서 참조를 실제로 사용하기 전까지 절대 초기화하고 싶지 않은 경우 입니다.
+
+    //늦은 초기화
+    var name: String? = null
+
+//    val name1 : String by lazy {
+//
+//    }
+
+    //가변 참조의 늦은 초기화
+    //lateinit 은 최초 사용 시 초기화가 되지 않지만 어떤 면에서는 by lazy 와 같은 효과를 냅니다.
+
+    lateinit var name2: String
+
+    /* - 코틀린은 `널이 될 수 있는 타입과 없는 타입을 구분하기 때문에 널 값을 사용하여 초기화하는 방법보다 늦은 초기화 방법을 사용하는 것이 좋습니다`.
+    - `늦은 초기화 방식을 사용하는 경우 NullPointerException이 발생할 위협을 제거할 수 있어 안전합니다.`
+    - `var` 를 늦은 초기화하기 위해서는 `lateinit` 이라는 키워드를 사용하고
+    - `val` 를 늦은 초기화하기 위해서는 `by lazy` 라는 키워드를 사용해야 합니다.
+     */
 }
 
