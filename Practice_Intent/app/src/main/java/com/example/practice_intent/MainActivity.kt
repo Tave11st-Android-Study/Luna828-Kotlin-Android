@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         nextBtn.setOnClickListener {
             //Intent 사용 방법
             val intent = Intent(this, SecondActivity::class.java)
+            intent.putExtra("key", "Hi, I'm Luna")
             startActivity(intent)
 
         }

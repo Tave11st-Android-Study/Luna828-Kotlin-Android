@@ -7,10 +7,12 @@
     tools:context=".SecondActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/secondPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="두번째 페이지"
-        tools:layout_editor_absoluteX="168dp"
-        tools:layout_editor_absoluteY="221dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
