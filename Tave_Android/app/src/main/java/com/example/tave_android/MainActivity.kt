@@ -17,12 +17,15 @@ class MainActivity : AppCompatActivity() {
         binding.btn.setOnClickListener {
             //Intent 사용 방법
             val intent = Intent(this, IntentActivity::class.java)
+            intent.putExtra("key", "Hi, I'm Luna")
             startActivity(intent)
         }
 
-//        binding.EditText.setOnClickListener {
-//            val intent = Intent(this, EditTextActivity::class.java)
-//            startActivity(intent)
-//        }
+        binding.EditText.setOnClickListener {
+            val intent = Intent(this, EditTextActivity::class.java)
+            startActivity(intent)
+        }
+
+        
     }
 }
