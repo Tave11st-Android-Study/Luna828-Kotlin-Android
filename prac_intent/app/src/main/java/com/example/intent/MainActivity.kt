@@ -4,11 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
-import com.example.intent.R
+import com.example.intent.EditTextActivity
 import com.example.intent.databinding.ActivityMainBinding
-import com.example.practice_intent.R.id
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,16 +15,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
         Log.d(TAG, "MainActivity - onCreate() called")
 
-        val nextBtn = findViewById<Button>(R.id.btn1)
-
-        nextBtn.setOnClickListener {
+        binding.btn.setOnClickListener {
             //Intent 사용 방법
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
+        }
 
+        binding.EditText.setOnClickListener {
+            val intent = Intent(this, EditTextActivity::class.java)
+            startActivity(intent)
         }
     }
 
