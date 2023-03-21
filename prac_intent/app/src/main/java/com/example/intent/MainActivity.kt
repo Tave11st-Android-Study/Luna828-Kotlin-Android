@@ -1,4 +1,4 @@
-package com.example.practice_intent
+package com.example.intent
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.intent.EditTextActivity
 import com.example.intent.databinding.ActivityMainBinding
+import com.example.practice_intent.SecondActivity
 
 class MainActivity : AppCompatActivity() {
 
