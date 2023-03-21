@@ -26,6 +26,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        
+        binding.checkBoxBtn.setOnClickListener {
+            val intent = Intent(this, CheckBoxActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.radioBtn.setOnClickListener {
+            val intent = Intent(this, RadioButtonActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
