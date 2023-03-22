@@ -24,7 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:onClick="onNextClicked"
             android:text="Next" />
 
         <Button
@@ -32,7 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="51dp"
             android:layout_marginTop="10dp"
-            android:onClick="onNextClicked"
             android:text="radioButton" />
 
         <Button
@@ -40,7 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="51dp"
             android:layout_marginTop="10dp"
-            android:onClick="onNextClicked"
             android:text="EditText" />
 
         <Button
@@ -48,7 +45,6 @@
             android:layout_width="match_parent"
             android:layout_height="51dp"
             android:layout_marginTop="10dp"
-            android:onClick="onNextClicked"
             android:text="CheckBox" />
 
         <Button
@@ -56,7 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginTop="10dp"
-            android:onClick="onNextClicked"
             android:text="progressBar" />
 
         <Button
@@ -64,8 +59,13 @@
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginTop="10dp"
-            android:onClick="onNextClicked"
             android:text="toggleSwitch" />
+
+        <Button
+            android:id="@+id/seekBarBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="seekBar" />
     </LinearLayout>
 
 

@@ -45,5 +45,10 @@ class DesignActivity : AppCompatActivity() {
             val intent = Intent(this, ProgressbarActivity::class.java)
             startActivity(intent)
         }
+
+        binding.seekBarBtn.setOnClickListener {
+            val intent = Intent(this, seekBarActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
