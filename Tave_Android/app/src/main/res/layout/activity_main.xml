@@ -19,18 +19,6 @@
         app:layout_constraintVertical_bias="0.043" />
 
     <Button
-        android:id="@+id/btn"
-        android:layout_width="123dp"
-        android:layout_height="51dp"
-        android:onClick="onNextClicked"
-        android:text="Next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.077" />
-
-    <Button
         android:id="@+id/EditText"
         android:layout_width="123dp"
         android:layout_height="51dp"
@@ -40,7 +28,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.23" />
+        app:layout_constraintVertical_bias="0.16" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="123dp"
+        android:layout_height="51dp"
+        android:onClick="onNextClicked"
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.008" />
 
     <Button
         android:id="@+id/checkBoxBtn"
@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.352" />
+        app:layout_constraintVertical_bias="0.282" />
 
     <Button
         android:id="@+id/radioBtn"
@@ -64,7 +64,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.465" />
+        app:layout_constraintVertical_bias="0.394" />
+
+    <Button
+        android:id="@+id/toggleSwitchBtn"
+        android:layout_width="163dp"
+        android:layout_height="49dp"
+        android:onClick="onNextClicked"
+        android:text="toggleSwitch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioBtn"
+        app:layout_constraintVertical_bias="0.043" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

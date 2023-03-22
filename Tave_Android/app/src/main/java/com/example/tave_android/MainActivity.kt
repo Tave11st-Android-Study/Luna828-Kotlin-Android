@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.tave_android.databinding.ActivityMainBinding
+import com.example.tave_android.intent_design_Prac.*
 
 class MainActivity : AppCompatActivity() {
     val TAG: String = "로그"
@@ -35,5 +36,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, RadioButtonActivity::class.java)
             startActivity(intent)
         }
+
+        binding.toggleSwitchBtn.setOnClickListener {
+            val intent = Intent(this, ToggleSwitchActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

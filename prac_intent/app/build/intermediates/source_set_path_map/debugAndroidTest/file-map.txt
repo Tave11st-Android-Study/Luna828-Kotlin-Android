@@ -1,7 +1,0 @@
-com.example.intent.test.app-core-1.5.0-0 C:\Users\dmsru\.gradle\caches\transforms-3\9625a4369847c3660983c501a7b3626b\transformed\core-1.5.0\res
-com.example.intent.test.app-annotation-experimental-1.3.0-1 C:\Users\dmsru\.gradle\caches\transforms-3\9fae957ef0e1266a83e5188cb210102e\transformed\annotation-experimental-1.3.0\res
-com.example.intent.test.app-androidTest-2 E:\.workspace\..TAVE\TAVE_11th_Android_Practice\prac_intent\app\build\generated\res\resValues\androidTest\debug
-com.example.intent.test.app-androidTest-3 E:\.workspace\..TAVE\TAVE_11th_Android_Practice\prac_intent\app\build\generated\res\rs\androidTest\debug
-com.example.intent.test.app-mergeDebugAndroidTestResources-4 E:\.workspace\..TAVE\TAVE_11th_Android_Practice\prac_intent\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.example.intent.test.app-mergeDebugAndroidTestResources-5 E:\.workspace\..TAVE\TAVE_11th_Android_Practice\prac_intent\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.example.intent.test.app-merged_res-6 E:\.workspace\..TAVE\TAVE_11th_Android_Practice\prac_intent\app\build\intermediates\merged_res\debugAndroidTest

@@ -12,16 +12,19 @@
         android:theme="@style/Theme.TAVE_Android"
         tools:targetApi="31">
         <activity
-            android:name=".CheckBoxActivity"
+            android:name=".intent_design_Prac.ToggleSwitchActivity"
             android:exported="false" />
         <activity
-            android:name=".RadioButtonActivity"
+            android:name=".intent_design_Prac.CheckBoxActivity"
             android:exported="false" />
         <activity
-            android:name=".EditTextActivity"
+            android:name=".intent_design_Prac.RadioButtonActivity"
             android:exported="false" />
         <activity
-            android:name=".IntentActivity"
+            android:name=".intent_design_Prac.EditTextActivity"
+            android:exported="false" />
+        <activity
+            android:name=".intent_design_Prac.IntentActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
