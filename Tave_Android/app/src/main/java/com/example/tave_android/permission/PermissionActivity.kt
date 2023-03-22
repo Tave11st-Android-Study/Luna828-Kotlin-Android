@@ -27,7 +27,7 @@ class PermissionActivity : AppCompatActivity() {
 
     fun checkPermission() {
         //권한을 확인하는 함수 만들기
-        val cameraPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) //카메라 권한이 무엇인지 체크하는 변수 cameraPermisson에 저장가능
+        val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) //카메라 권한이 무엇인지 체크하는 변수 cameraPermisson에 저장가능
 
         if (cameraPermission == PackageManager.PERMISSION_GRANTED) { //승인 된 상태
             openCamera()
