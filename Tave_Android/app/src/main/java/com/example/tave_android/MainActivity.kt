@@ -17,39 +17,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.btn.setOnClickListener {
-            //Intent 사용 방법
-            val intent = Intent(this, IntentActivity::class.java)
-            intent.putExtra("key", "Hi, I'm Luna")
+        binding.designBtn.setOnClickListener {
+            val intent = Intent(this, DesignActivity::class.java)
             startActivity(intent)
         }
 
-        binding.EditText.setOnClickListener {
-            val intent = Intent(this, EditTextActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.checkBoxBtn.setOnClickListener {
-            val intent = Intent(this, CheckBoxActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.radioBtn.setOnClickListener {
-            val intent = Intent(this, RadioButtonActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.toggleSwitchBtn.setOnClickListener {
-            val intent = Intent(this, ToggleSwitchActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.progressBtn.setOnClickListener {
-            val intent = Intent(this, ProgressbarActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.openCamera.setOnClickListener {
+        binding.permissionBtn.setOnClickListener {
             val intent = Intent(this, PermissionActivity::class.java)
             startActivity(intent)
         }
