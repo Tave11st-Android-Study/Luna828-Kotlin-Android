@@ -42,5 +42,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.progressBtn.setOnClickListener {
+            val intent = Intent(this, ProgressbarActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
