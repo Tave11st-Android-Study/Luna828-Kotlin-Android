@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.tave_android.databinding.ActivityMainBinding
 import com.example.tave_android.intent_design_Prac.*
+import com.example.tave_android.permission.PermissionActivity
+import java.security.Permission
 
 class MainActivity : AppCompatActivity() {
     val TAG: String = "로그"
@@ -44,6 +46,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.progressBtn.setOnClickListener {
             val intent = Intent(this, ProgressbarActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.openCamera.setOnClickListener {
+            val intent = Intent(this, PermissionActivity::class.java)
             startActivity(intent)
         }
     }
