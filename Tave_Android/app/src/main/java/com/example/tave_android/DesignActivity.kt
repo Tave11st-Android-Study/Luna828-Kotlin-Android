@@ -50,5 +50,10 @@ class DesignActivity : AppCompatActivity() {
             val intent = Intent(this, seekBarActivity::class.java)
             startActivity(intent)
         }
+
+        binding.ratingBtn.setOnClickListener {
+            val intent = Intent(this, RatingBarActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
