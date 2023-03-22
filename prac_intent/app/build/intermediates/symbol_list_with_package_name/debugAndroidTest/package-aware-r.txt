@@ -1,3 +1,0 @@
-com.example.intent.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme
