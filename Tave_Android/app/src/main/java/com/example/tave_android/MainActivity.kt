@@ -3,28 +3,27 @@ package com.example.tave_android
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.tave_android.databinding.ActivityMainBinding
-import com.example.tave_android.intent_design_Prac.*
 import com.example.tave_android.permission.PermissionActivity
-import java.security.Permission
 
-class MainActivity : AppCompatActivity() {
-    val TAG: String = "로그"
-
-    val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.designBtn.setOnClickListener(this)
+        binding.permissionBtn.setOnClickListener(this)
+
         setContentView(binding.root)
+    }
 
-        binding.designBtn.setOnClickListener {
-            val intent = Intent(this, DesignActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.permissionBtn.setOnClickListener {
-            val intent = Intent(this, PermissionActivity::class.java)
-            startActivity(intent)
+    override fun onClick(view: View?) {
+        when(view?.id) {
+           R.id.designBtn ->
+               Intent(this, DesignActivity::class.java).run { startActivity(this) }
+           R.id.permissionBtn ->
+               Intent(this, PermissionActivity::class.java).run { startActivity(this) }
         }
     }
 }

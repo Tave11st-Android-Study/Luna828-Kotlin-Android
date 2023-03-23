@@ -7,8 +7,7 @@ import android.os.Bundle
 import com.example.tave_android.databinding.ActivityIntentBinding
 
 class IntentActivity : AppCompatActivity() {
-
-    val binding by lazy { ActivityIntentBinding.inflate(layoutInflater) }
+    private val binding by lazy { ActivityIntentBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,12 +17,14 @@ class IntentActivity : AppCompatActivity() {
 
         //암시적 인텐트 : 웹 브라우저 호출, 이메일 전송, 전화 앱으로 통화
         binding.naverUrl.setOnClickListener {
-            val intentUrl = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.naver.com"))
-            startActivity(intentUrl)
+            Intent(Intent.ACTION_VIEW, Uri.parse("https://www.naver.com"))
+                .run { startActivity(this) }
         }
 
-//        if(intent.hasExtra("key")) {
-//         secondPage.text = intent.getStringExtra("key")
-//        }
+        /* TODO : 안쓰는 코드 인가요? 안쓰는 코드면 삭제!
+        if(intent.hasExtra("key")) {
+         secondPage.text = intent.getStringExtra("key")
+        }
+        */
     }
 }
