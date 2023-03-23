@@ -24,6 +24,9 @@
         android:theme="@style/Theme.TAVE_Android"
         tools:targetApi="31">
         <activity
+            android:name=".intent_design_Prac.SpinnerActivity"
+            android:exported="false" />
+        <activity
             android:name=".intent_design_Prac.SeekBarActivity"
             android:exported="false" />
         <activity

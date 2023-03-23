@@ -6,10 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.tave_android.common.Constant
 import com.example.tave_android.databinding.ActivityDesignBinding
 import com.example.tave_android.intent_design_Prac.*
 
@@ -29,6 +27,7 @@ class DesignActivity : AppCompatActivity(), View.OnClickListener {
         binding.progressBtn.setOnClickListener(this)
         binding.seekBarBtn.setOnClickListener(this)
         binding.ratingBtn.setOnClickListener(this)
+        binding.spinnerBtn.setOnClickListener(this)
 
         setContentView(binding.root)
 
@@ -81,6 +80,8 @@ class DesignActivity : AppCompatActivity(), View.OnClickListener {
                 Intent(this, SeekBarActivity::class.java).run { startActivity(this) }
             R.id.ratingBtn ->
                 Intent(this, RatingBarActivity::class.java).run { startActivity(this) }
+            R.id.spinnerBtn ->
+                Intent(this, SpinnerActivity::class.java).run { startActivity(this) }
         }
     }
 }
