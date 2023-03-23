@@ -7,8 +7,7 @@ import androidx.core.widget.addTextChangedListener
 import com.example.tave_android.databinding.ActivityEditTextBinding
 
 class EditTextActivity : AppCompatActivity() {
-
-    val binding by lazy { ActivityEditTextBinding.inflate(layoutInflater)}
+    private val binding by lazy { ActivityEditTextBinding.inflate(layoutInflater)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

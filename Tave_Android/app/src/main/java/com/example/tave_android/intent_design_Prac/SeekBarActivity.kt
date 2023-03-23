@@ -3,12 +3,10 @@ package com.example.tave_android.intent_design_Prac
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SeekBar
-import android.widget.SeekBar.OnSeekBarChangeListener
 import com.example.tave_android.databinding.ActivitySeekBarBinding
 
-class seekBarActivity : AppCompatActivity() {
-
-    val binding by lazy { ActivitySeekBarBinding.inflate(layoutInflater) }
+class SeekBarActivity : AppCompatActivity() {
+    private val binding by lazy { ActivitySeekBarBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,9 +14,11 @@ class seekBarActivity : AppCompatActivity() {
 
         with(binding){
             seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    if(fromUser) { //사람이 터치로 동작시킬때만 코드 실행
-                        textSeek.text = "${progress}"
+                    if(fromUser) {
+                        //사람이 터치로 동작 시킬 때만 코드 실행
+                        textSeek.text = "$progress"
                     }
                 }
 
