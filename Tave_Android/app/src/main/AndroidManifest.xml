@@ -5,8 +5,8 @@
     <!-- Permission 권한 -->
     <!-- android.permission.INTERNET 은 일반 권한을 말함 -->
     <!-- Manifest 에 명세 해주는 것 만으로 사용할 수 있다 -->
-    <uses-permission android:name="android.permission.INTERNET " /> <!-- 위험 권한 - Manifest 에도 명세 하고 코드 에서도 한번 더 확인 필요 (개인 정보와 관련된 권한은 모두 위험 권한) -->
-    <uses-permission android:name="android.permission.CAMERA " />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 위험 권한 - Manifest 에도 명세 하고 코드 에서도 한번 더 확인 필요 (개인 정보와 관련된 권한은 모두 위험 권한) -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
