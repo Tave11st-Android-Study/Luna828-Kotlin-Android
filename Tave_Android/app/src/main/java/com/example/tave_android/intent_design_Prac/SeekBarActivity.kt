@@ -6,7 +6,7 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import com.example.tave_android.databinding.ActivitySeekBarBinding
 
-class seekBarActivity : AppCompatActivity() {
+class SeekBarActivity : AppCompatActivity() {
 
     val binding by lazy { ActivitySeekBarBinding.inflate(layoutInflater) }
 

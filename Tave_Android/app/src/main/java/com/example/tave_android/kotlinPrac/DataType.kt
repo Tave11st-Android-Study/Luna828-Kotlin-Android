@@ -1,4 +1,4 @@
-package com.example.tave_android
+package com.example.tave_android.kotlinPrac
 
 fun main() {
     practiceVal()
@@ -66,7 +66,5 @@ fun practiceDataType1() {
     println(byteValue)
 }
 
-fun practiceDataType2() {
-
-}
+fun practiceDataType2() {}
 

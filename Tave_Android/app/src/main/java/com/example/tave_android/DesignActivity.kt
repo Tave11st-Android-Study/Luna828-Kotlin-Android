@@ -3,57 +3,48 @@ package com.example.tave_android
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.tave_android.databinding.ActivityDesignBinding
 import com.example.tave_android.intent_design_Prac.*
 
-class DesignActivity : AppCompatActivity() {
-
-    val binding by lazy { ActivityDesignBinding.inflate(layoutInflater) }
+class DesignActivity : AppCompatActivity(), View.OnClickListener {
+    private val binding by lazy { ActivityDesignBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding.btn.setOnClickListener(this)
+        binding.EditText.setOnClickListener(this)
+        binding.checkBoxBtn.setOnClickListener(this)
+        binding.radioBtn.setOnClickListener(this)
+        binding.toggleSwitchBtn.setOnClickListener(this)
+        binding.progressBtn.setOnClickListener(this)
+        binding.seekBarBtn.setOnClickListener(this)
+        binding.ratingBtn.setOnClickListener(this)
+
         setContentView(binding.root)
+    }
 
-        binding.btn.setOnClickListener {
-            //Intent 사용 방법
-            val intent = Intent(this, IntentActivity::class.java)
-            intent.putExtra("key", "Hi, I'm Luna")
-            startActivity(intent)
-        }
-
-        binding.EditText.setOnClickListener {
-            val intent = Intent(this, EditTextActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.checkBoxBtn.setOnClickListener {
-            val intent = Intent(this, CheckBoxActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.radioBtn.setOnClickListener {
-            val intent = Intent(this, RadioButtonActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.toggleSwitchBtn.setOnClickListener {
-            val intent = Intent(this, ToggleSwitchActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.progressBtn.setOnClickListener {
-            val intent = Intent(this, ProgressbarActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.seekBarBtn.setOnClickListener {
-            val intent = Intent(this, seekBarActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.ratingBtn.setOnClickListener {
-            val intent = Intent(this, RatingBarActivity::class.java)
-            startActivity(intent)
+    override fun onClick(view: View?) {
+        when(view?.id) {
+            R.id.btn ->
+                Intent(this, IntentActivity::class.java)
+                    .apply { putExtra("key", "Hi, i'm Luna") }
+                    .run { startActivity(this) }
+            R.id.EditText ->
+                Intent(this, EditTextActivity::class.java).run { startActivity(this) }
+            R.id.checkBoxBtn ->
+                Intent(this, CheckBoxActivity::class.java).run { startActivity(this) }
+            R.id.radioBtn ->
+                Intent(this, RadioButtonActivity::class.java).run { startActivity(this) }
+            R.id.toggleSwitchBtn ->
+                Intent(this, ToggleSwitchActivity::class.java).run { startActivity(this) }
+            R.id.progressBtn ->
+                Intent(this, ProgressbarActivity::class.java).run { startActivity(this) }
+            R.id.seekBarBtn ->
+                Intent(this, SeekBarActivity::class.java).run { startActivity(this) }
+            R.id.ratingBtn ->
+                Intent(this, RatingBarActivity::class.java).run { startActivity(this) }
         }
     }
 }
