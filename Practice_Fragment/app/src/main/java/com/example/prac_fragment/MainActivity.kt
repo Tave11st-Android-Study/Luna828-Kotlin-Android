@@ -14,28 +14,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        with(binding) {
-            BtnA.setOnClickListener {
-                GoAFragment()
-            }
+        binding.BtnA.setOnClickListener {
+            setFrag(0)
+        }
+        binding.BtnB.setOnClickListener {
+            setFrag(1)
+        }
 
-            BtnB.setOnClickListener {
-                GoBFragment()
-            }
+    }
+
+    private fun setFrag(fragNum: Int) {
+        val ft = supportFragmentManager.beginTransaction()
+        when(fragNum){
+            0 -> ft.replace(R.id.fragmentList, AFragment()).commit()
+            1 -> ft.replace(R.id.fragmentList, BFragment()).commit()
         }
     }
 
-    fun GoAFragment() {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragmentList, aFragment)
-        transaction.addToBackStack("a")
-        transaction.commit()
-    }
 
-    fun GoBFragment() {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragmentList, bFragment)
-        transaction.addToBackStack("b")
-        transaction.commit()
-    }
+//    fun GoAFragment() {
+//        val transaction = supportFragmentManager.beginTransaction()
+//        transaction.add(R.id.fragmentList, aFragment)
+//        transaction.addToBackStack("a")
+//        transaction.commit()
+//    }
+//
+//    fun GoBFragment() {
+//        val transaction = supportFragmentManager.beginTransaction()
+//        transaction.add(R.id.fragmentList, bFragment)
+//        transaction.addToBackStack("b")
+//        transaction.commit()
+//    }
 }
