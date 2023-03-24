@@ -85,3 +85,18 @@ class CustomAdapter(val listData: MutableList<Memo>) : RecyclerView.Adapter<Cust
         }
     }
 }
+
+/*
+Adapter란?
+- 하나의 Object(객체)로서, 보여지는 View와 그 View에 올릴 Data를 연결하는 일종의 Bridge이다.
+- 즉, 데이터의 원본을 받아 관리하고, 어댑터뷰가 출력할 수 있는 형태로 데이터를 제공하는 중간 객체 역할을 함
+- ArrayAdapter, CursorAdapter, SimpleAdapter 등 있다.
+- 어댑터 뷰가 출력할 수 있는 데이터로 만들어 놓는 공간 의미 , 어댑터 뷰는 데이터를 출력하는 역할
+- 어댑터와 연결된 원본 데이터가 변경되면 notifyDataSetChanged 메서드를 호출하여 어댑터 뷰에 원본이 변경되었다고 알려주어 어댑터 뷰가 다시 그림 그리도록 해야함함
+
+Adapter View란?
+- 많은 정보를 효과적으로 처리하기 위해, View에 직접 정보를 주입하지 않고, Adapter라는 중간 매개체 이용
+- ViewGruop 을 상속받으므로, 내부적으로 많은 뷰들을 담을 수 있음
+- ListView, GridView, Spinner, Gallery 등이 있음
+
+*/
