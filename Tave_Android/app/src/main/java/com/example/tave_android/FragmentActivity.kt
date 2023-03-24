@@ -17,6 +17,10 @@ class FragmentActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setFragment()
+
+        binding.btnSend.setOnClickListener {
+            listFragment.setValue("값 전달하기")
+        }
     }
 
     fun goDetail() {

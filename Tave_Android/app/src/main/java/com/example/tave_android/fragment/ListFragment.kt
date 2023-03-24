@@ -43,6 +43,9 @@ class ListFragment : Fragment() {
                 fragmentActivity.goDetail()
             }
         }
+    }
 
+    fun setValue(value: String) {
+        binding.textFromActivity.text = value
     }
 }
