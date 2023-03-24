@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding.designBtn.setOnClickListener(this)
         binding.permissionBtn.setOnClickListener(this)
+        binding.fragment.setOnClickListener(this)
 
         setContentView(binding.root)
     }
@@ -24,6 +25,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                Intent(this, DesignActivity::class.java).run { startActivity(this) }
            R.id.permissionBtn ->
                Intent(this, PermissionActivity::class.java).run { startActivity(this) }
+           R.id.fragment ->
+               Intent(this, FragmentActivity::class.java).run{startActivity(this)}
         }
     }
 }
