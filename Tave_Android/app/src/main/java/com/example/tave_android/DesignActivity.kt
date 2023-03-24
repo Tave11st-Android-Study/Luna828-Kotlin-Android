@@ -28,6 +28,7 @@ class DesignActivity : AppCompatActivity(), View.OnClickListener {
         binding.seekBarBtn.setOnClickListener(this)
         binding.ratingBtn.setOnClickListener(this)
         binding.spinnerBtn.setOnClickListener(this)
+        binding.recyclerBtn.setOnClickListener(this)
 
         setContentView(binding.root)
 
@@ -82,6 +83,8 @@ class DesignActivity : AppCompatActivity(), View.OnClickListener {
                 Intent(this, RatingBarActivity::class.java).run { startActivity(this) }
             R.id.spinnerBtn ->
                 Intent(this, SpinnerActivity::class.java).run { startActivity(this) }
+            R.id.recyclerBtn ->
+                Intent(this, RecyclerViewActivity::class.java).run { startActivity(this) }
         }
     }
 }
