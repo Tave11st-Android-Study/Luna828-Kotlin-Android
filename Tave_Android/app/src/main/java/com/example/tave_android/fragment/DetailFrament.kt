@@ -34,7 +34,7 @@ class DetailFrament : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnBack.setOnClickListener {
-            fragmentActivity.goDetail()
+            fragmentActivity.goBack()
         }
     }
 

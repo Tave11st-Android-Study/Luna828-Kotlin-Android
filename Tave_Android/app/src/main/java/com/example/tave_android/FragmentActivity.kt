@@ -2,6 +2,7 @@ package com.example.tave_android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import com.example.tave_android.databinding.ActivityFragmentBinding
 import com.example.tave_android.fragment.DetailFrament
 import com.example.tave_android.fragment.ListFragment
@@ -32,7 +33,7 @@ class FragmentActivity : AppCompatActivity() {
     }
 
     fun goBack() {
-        onBackPressed() //뒤로 가기 명령어가 담겨져 있음
+        onBackPressedDispatcher.onBackPressed() //뒤로 가기 명령어가 담겨져 있음
     }
 
     fun setFragment() {
