@@ -46,3 +46,14 @@ class MainActivity : AppCompatActivity() {
 //        transaction.commit()
 //    }
 }
+
+/*
+FragmentTransaction.replace() 와 add()의 차이
+fragmentTransaction.replace(int containerViewId, Fragment fragment, String tag)
+fragmentTransaction.add(int containerViewId, Fragment fragment, String tag)
+ 는 사용 방법은 비슷하다
+ replace()는 Container에 추가되었던 기존 프래그먼트를 바꾸는 역할을 한다.
+ 즉, 동일한 containerViewId로 추가 했던 모든 프래그먼트에 대해서 remove 호출하고 새로운 프래그먼트를 추가
+
+ add는 remove하는 것이 아닌 그 위에 프래그먼트를 추가하는 것 그러므로 화면이 겹쳐보일 수 있다는 것이 특징
+징*/
