@@ -56,4 +56,8 @@ fragmentTransaction.add(int containerViewId, Fragment fragment, String tag)
  즉, 동일한 containerViewId로 추가 했던 모든 프래그먼트에 대해서 remove 호출하고 새로운 프래그먼트를 추가
 
  add는 remove하는 것이 아닌 그 위에 프래그먼트를 추가하는 것 그러므로 화면이 겹쳐보일 수 있다는 것이 특징
+<<<<<<< HEAD
 징*/
+=======
+ */
+>>>>>>> 7628022361d3a4b6e2f5ba00a3fbf3cc41580d36
