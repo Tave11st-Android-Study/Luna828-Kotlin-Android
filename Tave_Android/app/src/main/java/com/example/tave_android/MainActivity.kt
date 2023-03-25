@@ -16,7 +16,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.permissionBtn.setOnClickListener(this)
         binding.fragment.setOnClickListener(this)
 
+        val customView = CustomView(this)
+
         setContentView(binding.root)
+
+        binding.frameLayout.addView(CustomView(this))
     }
 
     override fun onClick(view: View?) {

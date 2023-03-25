@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/aView"
     android:layout_width="match_parent"
@@ -8,12 +9,15 @@
     tools:context=".BFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:id="@+id/aText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFEB3B"
         android:gravity="center_horizontal|center_vertical"
-        android:text="A Fragment 입니다" />
+        android:text="A Fragment 입니다"
+        tools:layout_editor_absoluteX="-133dp"
+        tools:layout_editor_absoluteY="16dp" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
