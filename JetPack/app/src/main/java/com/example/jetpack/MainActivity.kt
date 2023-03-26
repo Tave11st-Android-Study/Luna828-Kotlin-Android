@@ -1,19 +1,17 @@
 package com.example.jetpack
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.ui.theme.JetPackTheme
@@ -25,8 +23,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             JetPackTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting(name = "Luna")
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    Greeting("Luna")
                 }
             }
         }
@@ -34,17 +35,38 @@ class MainActivity : ComponentActivity() {
 }
 
 //View를 뜻함
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Greeting(name: String) {
-   Button(onClick = { /*TODO*/ }, contentPadding = PaddingValues(
-       start = 20.dp,
-       top = 12.dp,
-       end = 20.dp,
-       bottom = 12.dp
-   )) {
-       Text(text = "Like $name!")
-       Icon(Icons.Filled.Favorite, contentDescription = "Favorite", )
+
+   Scaffold(
+       topBar = { SmallTopAppBar(title = { Text(text = name)})},
+       floatingActionButtonPosition = FabPosition.End,
+       floatingActionButton = {
+           FloatingActionButton(onClick = { /*TODO*/ }) {
+               Text(text = "Click")
+           }
+       }
+   ) {
+      MyComposableView()
    }
+}
+
+@Composable
+fun MyComposableView() {
+    Log.d("TAG", "MyComposableView: ")
+    // horizental LinearView
+    Row(
+        Modifier.padding(80.dp).background(Color(0xffeaffd0)),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = "Luna", Modifier.padding(all = 10.dp).background(Color.Yellow))
+        Spacer(modifier = Modifier.size(10.dp))
+        Text(text = "1234-1234")
+        Spacer(modifier = Modifier.size(10.dp))
+        Text(text = "1998-08-28")
+    }
 }
 
 //split 미리 보기
@@ -52,6 +74,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     JetPackTheme {
-        Greeting("Android")
+        Greeting("Luna")
     }
 }
