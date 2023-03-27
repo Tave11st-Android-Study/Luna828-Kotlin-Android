@@ -25,6 +25,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    BoxActivity()
                     Greeting(name = "KIM LUNA")
                     //Column 과 Row는 Linear Layout compose라고 보면 됨
                     Column(modifier = Modifier
