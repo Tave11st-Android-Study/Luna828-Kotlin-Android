@@ -13,9 +13,10 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ImageCard() {
-    val isFavorite = remember {
+    var isFavorite by remember { //by 위임 기능..? , by 쓰는 방법 import androidx.compose.runtime.getValue / setValue를 직접 import해주면 가능
         mutableStateOf(false)
     }
 
@@ -64,10 +65,10 @@ fun ImageCard() {
                 contentAlignment = Alignment.TopEnd,
             ){
                 IconButton(onClick = {
-                    isFavorite.value = !isFavorite.value
+                    isFavorite = !isFavorite
                 }) {
                     Icon(
-                        imageVector = if(isFavorite.value)Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        imageVector = if(isFavorite)Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = "favorite",
                         tint = Color.White
                     )
