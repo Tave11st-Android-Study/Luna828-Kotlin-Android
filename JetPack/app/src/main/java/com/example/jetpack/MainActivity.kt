@@ -26,6 +26,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting(name = "KIM LUNA")
+                    //Column 과 Row는 Linear Layout compose라고 보면 됨
                     Column(modifier = Modifier
                         .fillMaxSize()
                         .background(color = Color.Blue)
