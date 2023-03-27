@@ -7,37 +7,70 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.ui.theme.JetPackTheme
+import androidx.compose.foundation.Image as Image
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            JetPackTheme {
-                Surface(
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    BoxActivity()
-                    Greeting(name = "KIM LUNA")
-                    //Column 과 Row는 Linear Layout compose라고 보면 됨
-                    Column(modifier = Modifier
-                        .fillMaxSize()
-                        .background(color = Color.Blue)
-                        .padding(0.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceBetween
-                    ){
-                        Text("Hello")
-                        Text("Luna")
-                    }
+            ImageCard()
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ImageCard() {
+    val isFavorite = remember {
+        mutableStateOf(false)
+    }
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(0.5f)
+            .padding(16.dp), //비율
+        shape = RoundedCornerShape(8.dp),
+        elevation = CardDefaults.cardElevation(5.dp)
+    ) {
+        Box(
+            modifier =  Modifier.height(200.dp),
+
+        ){
+            Image(
+                painter = painterResource(id = R.drawable.painter),
+                contentDescription = "painter",
+                contentScale = ContentScale.Crop,
+            )
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.TopEnd,
+            ){
+                IconButton(onClick = {
+                    isFavorite.value = !isFavorite.value
+                }) {
+                    Icon(
+                        imageVector = if(isFavorite.value)Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        contentDescription = "favorite",
+                        tint = Color.White
+                    )
                 }
             }
         }
