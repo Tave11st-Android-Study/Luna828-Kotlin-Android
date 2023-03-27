@@ -22,12 +22,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetPackTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Luna")
+                    Greeting(name = "KIM LUNA")
+                    Column(modifier = Modifier
+                        .fillMaxSize()
+                        .background(color = Color.Blue)
+                        .padding(0.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
+                    ){
+                        Text("Hello")
+                        Text("Luna")
+                    }
                 }
             }
         }
@@ -41,7 +49,11 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String) {
 
    Scaffold(
-       topBar = { SmallTopAppBar(title = { Text(text = name)})},
+       topBar = { SmallTopAppBar(
+           title = {
+               Text(text = name)
+           })
+                },
        floatingActionButtonPosition = FabPosition.End,
        floatingActionButton = {
            FloatingActionButton(onClick = { /*TODO*/ }) {
@@ -50,6 +62,7 @@ fun Greeting(name: String) {
        }
    ) {
       MyComposableView()
+
    }
 }
 
@@ -58,10 +71,15 @@ fun MyComposableView() {
     Log.d("TAG", "MyComposableView: ")
     // horizental LinearView
     Row(
-        Modifier.padding(80.dp).background(Color(0xffeaffd0)),
+        Modifier
+            .padding(80.dp)
+            .background(Color(0xffeaffd0)),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = "Luna", Modifier.padding(all = 10.dp).background(Color.Yellow))
+        Text(text = "Luna",
+            Modifier
+                .padding(all = 10.dp)
+                .background(Color.Yellow))
         Spacer(modifier = Modifier.size(10.dp))
         Text(text = "1234-1234")
         Spacer(modifier = Modifier.size(10.dp))
@@ -74,6 +92,13 @@ fun MyComposableView() {
 @Composable
 fun DefaultPreview() {
     JetPackTheme {
-        Greeting("Luna")
+        Column() {
+            Greeting("Luna")
+            Column() {
+                Text("Hello", Modifier.padding(30.dp))
+                Spacer(modifier = Modifier.width(15.dp))
+                Text("Luna")
+            }
+        }
     }
 }
