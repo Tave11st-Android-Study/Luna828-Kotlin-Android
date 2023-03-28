@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -19,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,24 +29,46 @@ import androidx.navigation.compose.rememberNavController
 import com.example.jetpack.ui.theme.ui.theme.JetPackTheme
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+    private val viewModel by viewModels<MainViewModel>() //viewModel 사용법
+
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ViewModel()
+            val viewModel = viewModel<MainViewModel>()
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    viewModel.data.value,
+                    fontSize = 30.sp
+                )
+                Button(onClick = {
+                    viewModel.changeValue()
+                }) {
+                    Text("변경")
+                }
+            }
         }
     }
 }
 
 class MainViewModel : ViewModel(){
-    //ViewModel 같은 경우는 액티비티와 라이프 사이클을 동일하게 가져가는 특성 remember에 신경쓰지 않아도됨 
+    //ViewModel 같은 경우는 액티비티와 라이프 사이클을 동일하게 가져가는 특성 remember에 신경쓰지 않아도됨 (remember가 없어도 데이터가 유지가 되는 이유는 VM 자체가 액티비티하고 라이프 사이클을 같이 가져가서!)
+    private val _data = mutableStateOf("Hello")
+    val data: State<String> = _data //읽기 전용
+
+    fun changeValue() {
+        _data.value = "World"
+    }
 }
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun ViewModel(){
-    val data = remember{
+    val data = remember {
         mutableStateOf("Hello")
     }
     
