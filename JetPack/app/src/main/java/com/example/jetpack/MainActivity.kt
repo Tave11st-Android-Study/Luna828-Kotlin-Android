@@ -11,53 +11,116 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.jetpack.ui.theme.ui.theme.JetPackTheme
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class)
+    @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val (text, setValue) = remember {
-                mutableStateOf("")
-            }
+            val navController = rememberNavController()
 
-            val snackbarHostState = remember{SnackbarHostState()}
-            val scope = rememberCoroutineScope()
-
-            Scaffold(
-                snackbarHost = { SnackbarHost(hostState = snackbarHostState)}
-            ) {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    TextField(value = text,
-                        onValueChange = setValue,
-                    )
-                    Button(onClick ={
-                        scope.launch {
-                            snackbarHostState.showSnackbar("$text", duration = SnackbarDuration.Short)
-                        }
-                    }){
-                        Text(text = "클릭")
-                    }
+            NavHost(
+                navController = navController,
+                startDestination = "first",
+            ){
+                composable("first") {
+                    FirstScreen(navController = navController)
+                }
+                composable("second") {
+                    SecondScreen(navController = navController)
+                }
+                composable("third/{value}") { backStackEntry -> //backStackEntry를 통해 {value}값을 얻을 수 있음
+                    ThirdScreen(navController = navController, value = backStackEntry.arguments?.getString("value") ?: "")
                 }
             }
         }
     }
 }
 
+@Composable
+fun FirstScreen(navController: NavController){
+    val (value, setValue) = remember {
+        mutableStateOf("")
+    }
 
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(text = "첫 화면")
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = {
+                navController.navigate("second")
+            }
+        ) {
+            Text(text = "두번째!")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        TextField(value = value, onValueChange = setValue)
+        Button(
+            onClick = {
+                if(value.isNotEmpty()){
+                    navController.navigate("third/$value")
+                }
+            }
+        ) {
+            Text(text = "세번째!")
+        }
+    }
+}
+
+@Composable
+fun SecondScreen(navController: NavController){
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(text = "두번째 화면")
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = {
+                navController.navigateUp()
+            }
+        ) {
+            Text(text = "뒤로 가기")
+        }
+    }
+}
+
+@Composable
+fun ThirdScreen(navController: NavController, value: String){
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(text = "세번째 화면")
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(value)
+        Button(
+            onClick = {
+                navController.navigateUp()
+            }
+        ) {
+            Text(text = "뒤로 가기")
+        }
+    }
+}
 
 //View를 뜻함
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
