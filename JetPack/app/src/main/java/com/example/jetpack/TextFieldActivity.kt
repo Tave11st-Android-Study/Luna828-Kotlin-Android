@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 
 package com.example.jetpack
 
@@ -15,7 +15,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpack.ui.theme.JetPackTheme
 import kotlinx.coroutines.launch
@@ -40,6 +42,7 @@ fun DefaultPreview4() {
 
     val snackbarHostState = remember{SnackbarHostState()}
     val scope = rememberCoroutineScope()
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState)}
@@ -53,6 +56,7 @@ fun DefaultPreview4() {
                 onValueChange = setValue,
             )
             Button(onClick ={
+                keyboardController?.hide() //버튼을 누르면 키보드가 내려감
                 scope.launch {
                     snackbarHostState.showSnackbar("Hellos $text", duration = SnackbarDuration.Short)
                 }
