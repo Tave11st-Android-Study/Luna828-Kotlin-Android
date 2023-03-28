@@ -12,6 +12,16 @@
         android:theme="@style/Theme.JetPack"
         tools:targetApi="31">
         <activity
+            android:name=".TextFieldActivity"
+            android:exported="false"
+            android:label="@string/title_activity_text_field"
+            android:theme="@style/Theme.JetPack" />
+        <activity
+            android:name=".CardImage"
+            android:exported="false"
+            android:label="@string/title_activity_card_image"
+            android:theme="@style/Theme.JetPack" />
+        <activity
             android:name=".ComposableActivity"
             android:exported="false"
             android:label="@string/title_activity_composable"
