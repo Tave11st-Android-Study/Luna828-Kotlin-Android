@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -29,22 +31,55 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberNavController()
+            ViewModel()
+        }
+    }
+}
 
-            NavHost(
-                navController = navController,
-                startDestination = "first",
-            ){
-                composable("first") {
-                    FirstScreen(navController = navController)
-                }
-                composable("second") {
-                    SecondScreen(navController = navController)
-                }
-                composable("third/{value}") { backStackEntry -> //backStackEntry를 통해 {value}값을 얻을 수 있음
-                    ThirdScreen(navController = navController, value = backStackEntry.arguments?.getString("value") ?: "")
-                }
-            }
+class MainViewModel : ViewModel(){
+    //ViewModel 같은 경우는 액티비티와 라이프 사이클을 동일하게 가져가는 특성 remember에 신경쓰지 않아도됨 
+}
+
+@SuppressLint("UnrememberedMutableState")
+@Composable
+fun ViewModel(){
+    val data = remember{
+        mutableStateOf("Hello")
+    }
+    
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(
+            data.value,
+            fontSize = 30.sp
+        )
+        Button(onClick = {
+            data.value = "World"
+        }) {
+            Text("변경")
+        }
+    }
+}
+
+@Composable
+fun Navigation(){
+    val navController = rememberNavController()
+
+    NavHost(
+        navController = navController,
+        startDestination = "first",
+    ){
+        composable("first") {
+            FirstScreen(navController = navController)
+        }
+        composable("second") {
+            SecondScreen(navController = navController)
+        }
+        composable("third/{value}") { backStackEntry -> //backStackEntry를 통해 {value}값을 얻을 수 있음
+            ThirdScreen(navController = navController, value = backStackEntry.arguments?.getString("value") ?: "")
         }
     }
 }
