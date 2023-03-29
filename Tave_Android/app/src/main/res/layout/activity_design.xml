@@ -30,35 +30,35 @@
             android:id="@+id/radioBtn"
             android:layout_width="match_parent"
             android:layout_height="51dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:text="radioButton" />
 
         <Button
             android:id="@+id/EditText"
             android:layout_width="match_parent"
             android:layout_height="51dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:text="EditText" />
 
         <Button
             android:id="@+id/checkBoxBtn"
             android:layout_width="match_parent"
             android:layout_height="51dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:text="CheckBox" />
 
         <Button
             android:id="@+id/progressBtn"
             android:layout_width="match_parent"
             android:layout_height="49dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:text="progressBar" />
 
         <Button
             android:id="@+id/toggleSwitchBtn"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:text="toggleSwitch" />
 
         <Button
@@ -72,6 +72,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="RatingBar" />
+
+        <Button
+            android:id="@+id/spinnerBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Spinner" />
+
+        <Button
+            android:id="@+id/recyclerBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="recyclerView" />
     </LinearLayout>
 
 

@@ -14,8 +14,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding.designBtn.setOnClickListener(this)
         binding.permissionBtn.setOnClickListener(this)
+        binding.fragment.setOnClickListener(this)
+
+        val customView = CustomView(this)
 
         setContentView(binding.root)
+
+        binding.frameLayout.addView(CustomView(this))
     }
 
     override fun onClick(view: View?) {
@@ -24,6 +29,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                Intent(this, DesignActivity::class.java).run { startActivity(this) }
            R.id.permissionBtn ->
                Intent(this, PermissionActivity::class.java).run { startActivity(this) }
+           R.id.fragment ->
+               Intent(this, FragmentActivity::class.java).run{startActivity(this)}
         }
     }
 }

@@ -31,5 +31,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Permission" />
+
+        <Button
+            android:id="@+id/fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fragment" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Custom View"
+            android:textSize="24sp" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
