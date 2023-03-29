@@ -42,7 +42,8 @@ class MainActivity : ComponentActivity() {
             NavHost(navController = navController, startDestination = "home") {
                 composable(route = "home") {
                     HomeScreen(){ height, weight ->
-                        val bmi = viewModel.bimCalculate(height,weight)
+                        viewModel.bimCalculate(height,weight)
+                        navController.navigate("result")
 
                     }
                 }
