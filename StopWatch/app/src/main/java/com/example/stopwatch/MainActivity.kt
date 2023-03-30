@@ -17,13 +17,35 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.stopwatch.ui.theme.StopWatchTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.stopwatch.viewModel.MainViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            
+            val viewModel = viewModel<MainViewModel>()
+
+            val sec = viewModel.sec.value
+            val milli = viewModel.milli.value
+            val isRunning = viewModel.isRunning.value
+            val lapTimes = viewModel.lapTimes.value
+
+            MainScreen(
+                sec = sec,
+                milli = milli,
+                isRunning = isRunning,
+                lapTimes = lapTimes,
+                onReset = {viewModel.reset()},
+                onToggle = { running ->
+                    if(running){
+                        viewModel.pause()
+                    } else {
+                        viewModel.start()
+                    }
+                },
+                onLapTime = { viewModel.recordLapTime() }
+            )
         }
     }
 }
@@ -36,12 +58,12 @@ fun MainScreen(
     isRunning: Boolean,
     lapTimes: List<String>,
     onReset: () -> Unit,
-    onToggle: (Boolean) -> Boolean, //현재상태 알리기
+    onToggle: (Boolean) -> Unit, //현재상태 알리기
     onLapTime: () -> Unit
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(title = {Text(text = "StopWatch")})
+            TopAppBar(title = { Text(text = "StopWatch") })
         }
     ) {
         Column(
@@ -55,7 +77,7 @@ fun MainScreen(
                 Text(text = "$sec", fontSize = 100.sp)
                 Text(text = "$milli")
             }
-            
+
             Spacer(modifier = Modifier.height(16.dp))
 
             Column(
@@ -63,11 +85,11 @@ fun MainScreen(
                     .weight(1f) //1f 나머지 영역 다 차지
                     .verticalScroll(rememberScrollState())
             ) {
-                lapTimes.forEach{
-                    lapTime -> Text(lapTime)
+                lapTimes.forEach { lapTime ->
+                    Text(lapTime)
                 }
             }
-            
+
             Row(
                 modifier = Modifier
                     .padding(8.dp)
@@ -85,24 +107,47 @@ fun MainScreen(
                     onClick = { onToggle(isRunning) },
                     backgroundColor = Color.Green,
                 ) {
-                    Image(painter = painterResource(
-                        id =
-                        if(isRunning) R.drawable.baseline_pause_24
-                        else R.drawable.baseline_play_arrow_24),
+                    Image(
+                        painter = painterResource(
+                            id =
+                            if (isRunning) R.drawable.baseline_pause_24
+                            else R.drawable.baseline_play_arrow_24
+                        ),
                         contentDescription = "start/pause"
                     )
                 }
-                Button(onClick = {onLapTime}) {
+                Button(onClick = { onLapTime }) {
                     Text(text = "랩타임")
                 }
             }
         }
     }
-    
+
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
+    val viewModel = viewModel<MainViewModel>()
 
+    val sec = viewModel.sec.value
+    val milli = viewModel.milli.value
+    val isRunning = viewModel.isRunning.value
+    val lapTimes = viewModel.lapTimes.value
+
+    MainScreen(
+        sec = sec,
+        milli = milli,
+        isRunning = isRunning,
+        lapTimes = lapTimes,
+        onReset = {viewModel.reset()},
+        onToggle = { running ->
+            if(running){
+                viewModel.pause()
+            } else {
+                viewModel.start()
+            }
+        },
+        onLapTime = { viewModel.recordLapTime() }
+    )
 }
