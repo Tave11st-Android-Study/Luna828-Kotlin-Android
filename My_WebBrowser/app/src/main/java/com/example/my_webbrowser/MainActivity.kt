@@ -3,6 +3,7 @@ package com.example.my_webbrowser
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
+            HomeScreen()
         }
     }
 }
@@ -82,8 +83,11 @@ fun HomeScreen() {
 @Composable
 fun MyWebView() {
     AndroidView(
+        modifier = Modifier.fillMaxSize(),
         factory = {
                   WebView(it).apply {
+                      settings.javaScriptEnabled = true
+                      webViewClient = WebViewClient()
                       loadUrl("https://google.com")
                   }
         },
