@@ -86,7 +86,7 @@ fun MyWebView() {
         modifier = Modifier.fillMaxSize(),
         factory = {
                   WebView(it).apply {
-                      settings.javaScriptEnabled = true
+                      settings.javaScriptEnabled = true //가장 많이 하는 설정
                       webViewClient = WebViewClient()
                       loadUrl("https://google.com")
                   }
