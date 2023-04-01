@@ -14,26 +14,38 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.my_webbrowser.ui.theme.My_WebBrowserTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            HomeScreen()
+            val viewModel = viewModel<MainViewModel>()
+            HomeScreen(viewModel = viewModel)
         }
     }
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun HomeScreen() {
+fun HomeScreen(viewModel: MainViewModel) {
+
+    //keyboard의 포커스를 잃게해서 키보드를 숨기는 기능
+    val focusManager = LocalFocusManager.current
+
+    val (inputUrl, setUrl) = rememberSaveable {
+        mutableStateOf("https://www.google.com")
+    }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -64,24 +76,27 @@ fun HomeScreen() {
                 .fillMaxSize()
         ) {
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = inputUrl,
+                onValueChange = setUrl,
                 label = { Text(text = "https://")},
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                 keyboardActions = KeyboardActions(onSearch = {
-
+                    viewModel.url.value = inputUrl // viewModel의 url을 inputUrl로 맞춰주기
+                    focusManager.clearFocus() //키보드가 내려가는 효과내기
                 })
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            MyWebView()
+            MyWebView(viewModel = viewModel)
         }
     }
 }
 
 @Composable
-fun MyWebView() {
+fun MyWebView(
+    viewModel: MainViewModel,
+) {
     AndroidView(
         modifier = Modifier.fillMaxSize(),
         factory = {
@@ -92,7 +107,7 @@ fun MyWebView() {
                   }
         },
         update = {
-
+            webView -> webView.loadUrl(viewModel.url.value) //naver.com 변경시, 브라우저가 바뀌게됨
         },
     )
 }
