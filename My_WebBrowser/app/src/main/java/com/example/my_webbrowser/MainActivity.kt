@@ -116,5 +116,5 @@ fun MyWebView(
 // WebView : 앱 내에서 웹페이지를 표시하는 데 사용됨
 // 사용하기 위해서는 Menifest.xml 에  <uses-permission android:name="android.permission.INTERNET"/> 추가해줘야함
 // compose 에서는 AndoridView(factory = {WebView(it).apply { loadUrl()}}) loadUrl() 메서드로 웹사이트를 호출 할 수 있다.
-// settings.javaScriptEnabled = true 음.. 왜하는걸까요? 
+// settings.javaScriptEnabled = true 음.. 왜하는걸까요?
 // 공부출처 블로그 : https://ddolcat.tistory.com/597
