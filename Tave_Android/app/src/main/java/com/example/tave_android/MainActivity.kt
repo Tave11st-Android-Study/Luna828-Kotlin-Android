@@ -1,14 +1,20 @@
 package com.example.tave_android
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import com.example.tave_android.databinding.ActivityMainBinding
 import com.example.tave_android.permission.PermissionActivity
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -25,42 +31,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         binding.frameLayout.addView(CustomView(this))
-//
-//        Log.d("1이다", "1")
-//
-//        var thread = WorkerThread()
-//        thread.start()
+        Thread.sleep(5000)
+        println("")
+        println("")
+        Corutines().corutine() //GlobalScope.launch 사용
+        Corutines().corutine2()
 
-//        var runnable = Thread(RunnableThread) // (RunnableThread 빨간줄 에러)
-//        Error: Classifier 'RunnableThread' does not have a companion object, and thus must be initialized here
-//        runnable.start()
-
-//        Thread{
-//            var i = 0
-//            while (i < 10) {
-//                i++
-//                Log.i("람다식으로 Runnable 익명 객체 구현", "$i")
-//            }
-//        }.start()
-//
-//        Log.d("2이다", "2")
-//
-//        thread(start = true){
-//            var i = 10
-//            while(i <= 10) {
-//                i--
-//                if(i == 0){
-//                    break
-//                }
-//                try {
-//                    Thread.sleep(2000)
-//                }catch (exception: NumberFormatException){
-//                    0
-//                }
-//                Log.i("Kotlin에서 제공하는 thread", "$i")
-//            }
-//        }
-        Corutines().corutine() //GlobalScope.launch 사용 
     }
 
     override fun onClick(view: View?) {
