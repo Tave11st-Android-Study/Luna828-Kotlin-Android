@@ -1,9 +1,7 @@
 package com.example.my_webbrowser.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
@@ -41,4 +39,14 @@ fun My_WebBrowserTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Com
         shapes = Shapes,
         content = content
     )
+}
+
+@Composable
+fun MaterialTheme(
+    colors: Colors,
+    typography: androidx.compose.material.Typography,
+    shapes: Shapes,
+    content: @Composable () -> Unit
+){
+
 }

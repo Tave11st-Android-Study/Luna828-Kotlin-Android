@@ -39,58 +39,58 @@ class MainActivity : ComponentActivity() {
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(viewModel: MainViewModel) {
-
     //keyboard의 포커스를 잃게해서 키보드를 숨기는 기능
     val focusManager = LocalFocusManager.current
 
     val (inputUrl, setUrl) = rememberSaveable {
         mutableStateOf("https://www.google.com")
     }
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(text = "나만의 웹 브라우저")},
-                actions = {
-                    IconButton(onClick = {
 
-                    }) {
-                       Icon(
-                           imageVector = Icons.Default.ArrowBack,
-                           contentDescription = "back",
-                           tint = Color.White)
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text(text = "나만의 웹 브라우저")},
+                    actions = {
+                        IconButton(onClick = {
+
+                        }) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBack,
+                                contentDescription = "back",
+                                tint = Color.White)
+                        }
+                        IconButton(onClick = {
+
+                        }) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowForward,
+                                contentDescription = "forward",
+                                tint = Color.White)
+                        }
                     }
-                    IconButton(onClick = {
+                )
+            }) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxSize()
+            ) {
+                OutlinedTextField(
+                    value = inputUrl,
+                    onValueChange = setUrl,
+                    label = { Text(text = "https://")},
+                    modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                    keyboardActions = KeyboardActions(onSearch = {
+                        viewModel.url.value = inputUrl // viewModel의 url을 inputUrl로 맞춰주기
+                        focusManager.clearFocus() //키보드가 내려가는 효과내기
+                    })
+                )
+                Spacer(modifier = Modifier.height(16.dp))
 
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowForward,
-                            contentDescription = "forward",
-                            tint = Color.White)
-                    }
-                }
-            )
-    }) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxSize()
-        ) {
-            OutlinedTextField(
-                value = inputUrl,
-                onValueChange = setUrl,
-                label = { Text(text = "https://")},
-                modifier = Modifier.fillMaxWidth(),
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                keyboardActions = KeyboardActions(onSearch = {
-                    viewModel.url.value = inputUrl // viewModel의 url을 inputUrl로 맞춰주기
-                    focusManager.clearFocus() //키보드가 내려가는 효과내기
-                })
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-            MyWebView(viewModel = viewModel)
+                MyWebView(viewModel = viewModel)
+            }
         }
-    }
 }
 
 @Composable
