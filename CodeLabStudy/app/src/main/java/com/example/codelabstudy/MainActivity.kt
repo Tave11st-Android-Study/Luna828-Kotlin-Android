@@ -8,45 +8,47 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MovableContent
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.example.codelabstudy.ui.theme.CodeLabStudyTheme
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.example.codelabstudy.home.Home
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-
         setContent {
-            CodeLabStudyTheme() {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    contentColor = MaterialTheme.colors.primary,
-                ) {
-                    Scaffold(
-                        topBar = { AppBar() }
-                    ) {
-                        Column(
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                        ) {
-                            Text(
-                                text = "HI, Android",
-                                modifier = Modifier.padding(16.dp, vertical = 8.dp)
-                            )
-                            FilledTextField(colors = Color.White, shapes = MaterialTheme.shapes.small)
-                            LoginButton(onClick = {}, modifier = Modifier.padding(16.dp))
-                        }
-                    }
-                }
+            CodeLabStudyTheme {
+                Home()
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    contentColor = MaterialTheme.colors.primary,
+//                ) {
+//                    Scaffold(
+//                        //topBar = { AppBar() }
+//                    ) {
+//                        Row(
+//                            modifier = Modifier.fillMaxWidth(),
+//                        ){
+//
+//                        }
+//                        Column(
+//                            verticalArrangement = Arrangement.Center,
+//                            horizontalAlignment = Alignment.CenterHorizontally,
+//                        ) {
+//                            Text(
+//                                text = "HI, Android",
+//                                modifier = Modifier.padding(16.dp, vertical = 8.dp)
+//                            )
+//                            FilledTextField(colors = Color.White, shapes = MaterialTheme.shapes.small)
+//                            LoginButton(onClick = {}, modifier = Modifier.padding(16.dp))
+//                        }
+//                    }
+//                }
             }
         }
     }
