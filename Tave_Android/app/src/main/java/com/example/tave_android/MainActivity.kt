@@ -9,10 +9,7 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import com.example.tave_android.databinding.ActivityMainBinding
 import com.example.tave_android.permission.PermissionActivity
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.concurrent.thread
@@ -37,7 +34,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Corutines().corutine() //GlobalScope.launch 사용
         Corutines().corutine2()
 
+//        CoroutineScope(Dispatchers.Main).launch { // 어디에다가 실습해봐야 에러가 안날까요?
+//            TODO("코드 1")
+//            subRoutine()
+//            TODO("코드 2")
+//        }
     }
+
+    suspend fun subRoutine(){
+        for(i in 0..10){
+            Log.d("sub Routine", "$i")
+        }
+    }
+
 
     override fun onClick(view: View?) {
         when(view?.id) {
