@@ -40,12 +40,7 @@ import androidx.compose.material.TabRow
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -74,6 +69,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.codelabstudy.R
 import com.example.codelabstudy.ui.theme.*
 import kotlinx.coroutines.coroutineScope
@@ -88,7 +84,7 @@ private enum class TabPage {
  * Shows the entire screen.
  */
 @Composable
-fun Home() {
+fun Home(navController: NavController, onHomeClone: () -> Unit) {
     // String resources.
     val allTasks = stringArrayResource(R.array.tasks)
     val allTopics = stringArrayResource(R.array.topics).toList()
@@ -150,12 +146,11 @@ fun Home() {
         backgroundColor = backgroundColor,
         floatingActionButton = {
             HomeFloatingActionButton(
-                extended = lazyListState.isScrollingUp(),
-                onClick = {
-                    coroutineScope.launch {
-                        showEditMessage()
-                    }
-                }
+                extended = lazyListState.isScrollInProgress,
+                onClick = onHomeClone,
+//                    coroutineScope.launch {
+//                        showEditMessage()
+//                    }
             )
         }
     ) { padding ->
@@ -232,14 +227,12 @@ private fun HomeFloatingActionButton(
     extended: Boolean,
     onClick: () -> Unit
 ) {
-    // Use `FloatingActionButton` rather than `ExtendedFloatingActionButton` for full control on
-    // how it should animate.
     FloatingActionButton(onClick = onClick) {
         Row(
             modifier = Modifier.padding(horizontal = 16.dp)
         ) {
             Icon(
-                imageVector = Icons.Default.Edit,
+                imageVector = Icons.Default.ArrowForward,
                 contentDescription = null
             )
             // Toggle the visibility of the content with animation.

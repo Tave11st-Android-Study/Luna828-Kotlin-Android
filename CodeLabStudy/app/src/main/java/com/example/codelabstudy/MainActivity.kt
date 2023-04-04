@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             CodeLabStudyTheme {
-                Home()
+                Screen(startRoute = NAV_Route.MAIN.routeName)
 //                Surface(
 //                    modifier = Modifier.fillMaxSize(),
 //                    contentColor = MaterialTheme.colors.primary,
