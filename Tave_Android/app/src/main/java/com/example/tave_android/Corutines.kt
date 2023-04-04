@@ -5,9 +5,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class Corutines : Thread() {
+class Coroutines : Thread() {
 
-    fun corutine() {
+    fun coroutine() {
         repeat(1){
             GlobalScope.launch {
                 /*
@@ -22,7 +22,7 @@ class Corutines : Thread() {
         }
     }
 
-    fun corutine2() {
+    fun coroutine2() {
         val states = arrayOf("Starting", "Doing Task 1", "Doing Task 2", "Ending")
         println("시작")
         repeat(1){

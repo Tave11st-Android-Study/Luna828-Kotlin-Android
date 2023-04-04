@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,21 +32,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Thread.sleep(5000)
         println("")
         println("")
-        Corutines().corutine() //GlobalScope.launch 사용
-        Corutines().corutine2()
+        Coroutines().coroutine() //GlobalScope.launch 사용
+        Coroutines().coroutine2()
 
-//        CoroutineScope(Dispatchers.Main).launch { // 어디에다가 실습해봐야 에러가 안날까요?
-//            TODO("코드 1")
-//            subRoutine()
-//            TODO("코드 2")
-//        }
+        GlobalScope.launch(Dispatchers.Main) {
+            subRoutines()
+        }
     }
 
-    suspend fun subRoutine(){
-        for(i in 0..10){
+    suspend fun subRoutines() {
+        for (i in 0 .. 10){
             Log.d("sub Routine", "$i")
         }
     }
+
 
 
     override fun onClick(view: View?) {
