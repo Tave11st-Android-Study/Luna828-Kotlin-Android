@@ -10,24 +10,25 @@ import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColors(
-    primary = Purple100,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = primaryDark,
+    primaryVariant = primaryDarkVariant,
+    onPrimary = White2,
+    secondary = darkSecondary,
+    secondaryVariant = darkSecondaryVariant,
+    onSecondary = White2,
+    error = RedErrorLight,
+    onError = RedErrorLight,
 )
 
 private val LightColorPalette = lightColors(
-    primary = Color.Gray,
-    primaryVariant = Purple700,
-    secondary = Teal200,
-
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    primary = primaryLight,
+    primaryVariant = primaryLightVariant,
+    onPrimary = Black2,
+    secondary = lightSecondary,
+    secondaryVariant = lightSecondaryVariant,
+    onSecondary = Black2,
+    error = RedErrorDark,
+    onError = RedErrorLight,
 )
 
 @Composable

@@ -1,9 +1,7 @@
 package com.example.codelabstudy.home
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
@@ -16,19 +14,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.codelabstudy.ui.theme.Green300
-import com.example.codelabstudy.ui.theme.Green800
-import com.example.codelabstudy.ui.theme.Purple100
-import com.example.codelabstudy.ui.theme.Purple700
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import com.example.codelabstudy.ui.theme.*
 
 private enum class TabPage2 {
     Home, Work
@@ -53,21 +45,28 @@ fun HomeClone(navController: NavController) {
             )
         },
         backgroundColor = backgroundColor,
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround
         ) {
-        DemoScreen()
+            darkModeSwitch()
+        }
+        //DemoScreen()
     }
 }
 
 @Composable
-private  fun DemoScreen(){
+private fun DemoScreen() {
     var sliderPosition by remember {
         mutableStateOf(20f)
     }
 
-    val handlePositionChange = { position : Float ->
+    val handlePositionChange = { position: Float ->
         sliderPosition = position
     }
-    
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -86,12 +85,31 @@ private  fun DemoScreen(){
     }
 }
 
+@Composable
+fun darkModeSwitch() {
+
+    val checked = remember {
+        mutableStateOf(false)
+    }
+
+    Switch(
+        checked = checked.value,
+        onCheckedChange = {
+            checked.value = it
+        }
+    )
+    if (checked.value) {
+        Text(text = "TRUE")
+    } else {
+        Text(text = "FALSE")
+    }
+}
 
 @Composable
 private fun DemoSlider(
     sliderPosition: Float,
     onPositionChange: (Float) -> Unit
-){
+) {
     Slider(
         modifier = Modifier.padding(10.dp),
         valueRange = 20f..40f,
