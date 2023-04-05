@@ -25,6 +25,10 @@ import com.example.codelabstudy.ui.theme.Green300
 import com.example.codelabstudy.ui.theme.Green800
 import com.example.codelabstudy.ui.theme.Purple100
 import com.example.codelabstudy.ui.theme.Purple700
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 private enum class TabPage2 {
     Home, Work
@@ -49,10 +53,51 @@ fun HomeClone(navController: NavController) {
             )
         },
         backgroundColor = backgroundColor,
-
         ) {
-
+        DemoScreen()
     }
+}
+
+@Composable
+private  fun DemoScreen(){
+    var sliderPosition by remember {
+        mutableStateOf(20f)
+    }
+
+    val handlePositionChange = { position : Float ->
+        sliderPosition = position
+    }
+    
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Text("Hello Compose")
+        Spacer(modifier = Modifier.height(150.dp))
+        DemoSlider(
+            sliderPosition = sliderPosition,
+            onPositionChange = handlePositionChange,
+        )
+        Text(
+            style = MaterialTheme.typography.h2,
+            text = sliderPosition.toInt().toString() + "sp"
+        )
+    }
+}
+
+
+@Composable
+private fun DemoSlider(
+    sliderPosition: Float,
+    onPositionChange: (Float) -> Unit
+){
+    Slider(
+        modifier = Modifier.padding(10.dp),
+        valueRange = 20f..40f,
+        value = sliderPosition,
+        onValueChange = { onPositionChange(it) }
+    )
 }
 
 @Composable
@@ -61,7 +106,6 @@ private fun HomeTabBar(
     tabPage: TabPage2, //enum class
     onTabSelected: (tabPage: TabPage2) -> Unit
 ) {
-
     TabRow(
         selectedTabIndex = tabPage.ordinal,
         backgroundColor = backgroundColor,

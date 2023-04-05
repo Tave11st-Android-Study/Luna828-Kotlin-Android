@@ -15,6 +15,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.example.codelabstudy.ui.theme.CodeLabStudyTheme
 import com.example.codelabstudy.home.Home
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -24,35 +28,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             CodeLabStudyTheme {
                 Screen(startRoute = NAV_Route.MAIN.routeName)
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    contentColor = MaterialTheme.colors.primary,
-//                ) {
-//                    Scaffold(
-//                        //topBar = { AppBar() }
-//                    ) {
-//                        Row(
-//                            modifier = Modifier.fillMaxWidth(),
-//                        ){
-//
-//                        }
-//                        Column(
-//                            verticalArrangement = Arrangement.Center,
-//                            horizontalAlignment = Alignment.CenterHorizontally,
-//                        ) {
-//                            Text(
-//                                text = "HI, Android",
-//                                modifier = Modifier.padding(16.dp, vertical = 8.dp)
-//                            )
-//                            FilledTextField(colors = Color.White, shapes = MaterialTheme.shapes.small)
-//                            LoginButton(onClick = {}, modifier = Modifier.padding(16.dp))
-//                        }
-//                    }
-//                }
             }
         }
     }
 }
+
 
 @Composable
 fun AppBar(){
