@@ -1,8 +1,16 @@
 package com.example.codelabstudy.home
 
 import android.annotation.SuppressLint
+import android.content.ClipData.Item
+import android.media.Image
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material.*
@@ -23,6 +31,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.codelabstudy.Affirmation
 import com.example.codelabstudy.R
 import com.example.codelabstudy.ui.theme.*
 
@@ -38,6 +47,8 @@ fun HomeClone(navController: NavController) {
 
     val backgroundColor = if (tabPage == TabPage2.Home) Purple100 else Green300
 
+    val scrollState = rememberScrollState()
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
@@ -50,11 +61,90 @@ fun HomeClone(navController: NavController) {
         },
         backgroundColor = backgroundColor,
     ) {
-        Column() {
+        Column(
+            modifier = Modifier.verticalScroll(scrollState)
+        ) {
             TextSwitch()
+            Spacer(modifier = Modifier.height(10.dp))
+            PhotoGrid()
             Spacer(modifier = Modifier.height(10.dp))
             CustomList(items = listOf("김은경", "이경진", "경희원"))
             //DemoScreen()
+        }
+    }
+}
+
+@Composable
+fun PhotoGrid() {
+    LazyHorizontalGrid(
+        rows = GridCells.Fixed(1),
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier
+            .height(120.dp)
+            .fillMaxWidth(),
+    ) {
+//        items(5) { i ->
+//            Image(imageVector = R.string., contentDescription = )
+//            Image(
+//                painter = painterResource(id = R.drawable.image_1),
+//                contentDescription = "",
+//                modifier = Modifier.padding(horizontal = 10.dp)
+//            )
+//        }
+        item {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+//                items(5) { i ->
+//                    Image(painter = painterResource(id = R.drawable.image_1),
+//                        contentDescription = "image1",
+//                        modifier = Modifier.padding(horizontal = 10.dp))
+//                }
+                Image(
+                    painter = painterResource(id = R.drawable.image_1),
+                    contentDescription = "image1",
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.image_2),
+                    contentDescription = "image2",
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.image_3),
+                    contentDescription = "image3",
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.image_4),
+                    contentDescription = "image4",
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.image_5),
+                    contentDescription = "image5"
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun lazyRow() {
+    val itemList = (0..5).toList()
+    val itemsIndexedList = listOf("A", "B", "C")
+
+    LazyRow {
+        items(itemList) {
+            Text(text = "First item")
+        }
+
+        item {
+            Text(text = "Single item")
+        }
+
+        itemsIndexed(itemsIndexedList) { index, item ->
+            Text(text = "Item at index $index is $item")
         }
     }
 }
@@ -101,7 +191,7 @@ fun CustomList(items: List<String>) {
                     .background(color = Color.Transparent, shape = RoundedCornerShape(50.dp))
             ) {
             }
-            repeat(5) {
+            repeat(5) { //scroll 사용해보려고 넣은 것
                 for (item in items) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
