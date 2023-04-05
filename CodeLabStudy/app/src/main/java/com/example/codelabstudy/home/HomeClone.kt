@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -84,12 +85,18 @@ private fun DemoScreen() {
 }
 
 @Composable
-fun CustomList(items: List<String>){
+fun CustomList(items: List<String>) {
 
-    Column {
-        for(item in items){
-            Text(text = "$item")
-            Divider(color = Color.Black)
+    Box(
+        modifier = Modifier.padding(12.dp)
+    ) {
+        Column(
+            modifier = Modifier.background(color = Color.White, shape = RectangleShape)
+        ) {
+            for (item in items) {
+                Text(text = "$item")
+                Divider(color = Color.Black)
+            }
         }
     }
 }
@@ -105,7 +112,7 @@ fun TextSwitch() {
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround
-    ){
+    ) {
         Switch(
             checked = checked.value,
             onCheckedChange = {
