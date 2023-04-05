@@ -17,10 +17,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.codelabstudy.R
 import com.example.codelabstudy.ui.theme.*
 
 private enum class TabPage2 {
@@ -93,9 +96,28 @@ fun CustomList(items: List<String>) {
         Column(
             modifier = Modifier.background(color = Color.White, shape = RectangleShape)
         ) {
-            for (item in items) {
-                Text(text = "$item")
-                Divider(color = Color.Black)
+            Box(
+                modifier = Modifier
+                    .background(color = Color.Transparent, shape = RoundedCornerShape(50.dp))
+            ) {
+            }
+            repeat(5) {
+                for (item in items) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceAround
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_android_black_24dp),
+                            contentDescription = "android",
+                            modifier = Modifier.size(50.dp),
+                            colorFilter = ColorFilter.tint(color = Color.Gray)
+                        )
+                        Text(text = "$item")
+                    }
+                    Divider(color = Color.Black)
+                }
             }
         }
     }
