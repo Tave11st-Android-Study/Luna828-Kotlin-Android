@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             CodeLabStudyTheme {
-                Screen(startRoute = NAV_Route.MAIN.routeName)
+                Screen(startRoute = NAV_Route.PAGE2.routeName)
             }
         }
     }

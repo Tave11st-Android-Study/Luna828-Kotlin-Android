@@ -46,14 +46,12 @@ fun HomeClone(navController: NavController) {
         },
         backgroundColor = backgroundColor,
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            darkModeSwitch()
+        Column() {
+            TextSwitch()
+            Spacer(modifier = Modifier.height(10.dp))
+            CustomList(items = listOf("김은경", "이경진", "경희원"))
+            //DemoScreen()
         }
-        //DemoScreen()
     }
 }
 
@@ -86,22 +84,39 @@ private fun DemoScreen() {
 }
 
 @Composable
-fun darkModeSwitch() {
+fun CustomList(items: List<String>){
+
+    Column {
+        for(item in items){
+            Text(text = "$item")
+            Divider(color = Color.Black)
+        }
+    }
+}
+
+@Composable
+fun TextSwitch() {
 
     val checked = remember {
         mutableStateOf(false)
     }
 
-    Switch(
-        checked = checked.value,
-        onCheckedChange = {
-            checked.value = it
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround
+    ){
+        Switch(
+            checked = checked.value,
+            onCheckedChange = {
+                checked.value = it
+            }
+        )
+        if (checked.value) {
+            Text(text = "TRUE")
+        } else {
+            Text(text = "FALSE")
         }
-    )
-    if (checked.value) {
-        Text(text = "TRUE")
-    } else {
-        Text(text = "FALSE")
     }
 }
 
