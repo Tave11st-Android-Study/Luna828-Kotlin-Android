@@ -28,34 +28,29 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         setContentView(binding.root)
 
-        binding.frameLayout.addView(CustomView(this))
-        Thread.sleep(5000)
-        println("")
-        println("")
-        Coroutines().coroutine() //GlobalScope.launch 사용
-        Coroutines().coroutine2()
+        CoroutineScope(Dispatchers.Default).launch {
+            launch {
+                for (i in 0..10) {
+                    Log.d("로그1", "$i")
+                }
+            }
 
-        GlobalScope.launch(Dispatchers.Main) {
-            subRoutines()
+            launch {
+                for (i in 0..10) {
+                    Log.d("로그2", "$i")
+                }
+            }.join()
         }
     }
-
-    suspend fun subRoutines() {
-        for (i in 0 .. 10){
-            Log.d("sub Routine", "$i")
-        }
-    }
-
-
 
     override fun onClick(view: View?) {
-        when(view?.id) {
-           R.id.designBtn ->
-               Intent(this, DesignActivity::class.java).run { startActivity(this) }
-           R.id.permissionBtn ->
-               Intent(this, PermissionActivity::class.java).run { startActivity(this) }
-           R.id.fragment ->
-               Intent(this, FragmentActivity::class.java).run{startActivity(this)}
+        when (view?.id) {
+            R.id.designBtn ->
+                Intent(this, DesignActivity::class.java).run { startActivity(this) }
+            R.id.permissionBtn ->
+                Intent(this, PermissionActivity::class.java).run { startActivity(this) }
+            R.id.fragment ->
+                Intent(this, FragmentActivity::class.java).run { startActivity(this) }
         }
     }
 }
