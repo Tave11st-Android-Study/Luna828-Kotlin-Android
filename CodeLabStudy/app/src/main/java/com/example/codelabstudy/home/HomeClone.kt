@@ -92,42 +92,42 @@ fun PhotoGrid() {
             .height(120.dp)
             .fillMaxWidth(),
     ) {
-        items(5) { i ->
-            val painter = rememberImagePainter(data = "R.drawable.image_$i.jpg") //이거 질문.. 질문 .. 별표 ..
-            Image(
-                painter = painter,
-                contentDescription = "",
-                modifier = Modifier.padding(horizontal = 10.dp)
-            )
-        }
-//        item {
-//            Row(verticalAlignment = Alignment.CenterVertically) {
-//                Image(
-//                    painter = painterResource(id = R.drawable.image_1),
-//                    contentDescription = "image1",
-//                    modifier = Modifier.padding(horizontal = 10.dp)
-//                )
-//                Image(
-//                    painter = painterResource(id = R.drawable.image_2),
-//                    contentDescription = "image2",
-//                    modifier = Modifier.padding(horizontal = 10.dp)
-//                )
-//                Image(
-//                    painter = painterResource(id = R.drawable.image_3),
-//                    contentDescription = "image3",
-//                    modifier = Modifier.padding(horizontal = 10.dp)
-//                )
-//                Image(
-//                    painter = painterResource(id = R.drawable.image_4),
-//                    contentDescription = "image4",
-//                    modifier = Modifier.padding(horizontal = 10.dp)
-//                )
-//                Image(
-//                    painter = painterResource(id = R.drawable.image_5),
-//                    contentDescription = "image5"
-//                )
-//            }
+//        items(5) { i ->
+//            val painter = rememberImagePainter(data = "R.drawable.image_$i.jpg") //이거 질문.. 질문 .. 별표 ..
+//            Image(
+//                painter = painter,
+//                contentDescription = "",
+//                modifier = Modifier.padding(horizontal = 10.dp)
+//            )
 //        }
+        item {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painter = painterResource(id = R.drawable.image_1),
+                    contentDescription = "image1",
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.image_2),
+                    contentDescription = "image2",
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.image_3),
+                    contentDescription = "image3",
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.image_4),
+                    contentDescription = "image4",
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.image_5),
+                    contentDescription = "image5"
+                )
+            }
+        }
     }
 }
 
