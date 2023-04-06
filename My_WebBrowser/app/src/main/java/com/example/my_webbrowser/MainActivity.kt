@@ -142,7 +142,7 @@ fun MyWebView(
                     if(webView.canGoForward()){
                         webView.goForward()
                     }else{
-                        //snackbar를 띄우기 위해 scaffoldState가 필요했던 것!
+                        //snackbar를 띄우기 위해 scaffoldState가 필요했던 것!!!
                         scaffoldState.snackbarHostState.showSnackbar("더 이상 앞으로 갈 수 없음")
                     }
                 }
