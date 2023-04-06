@@ -13,12 +13,11 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
@@ -106,49 +105,55 @@ fun MyWebView(
     viewModel: MainViewModel,
     scaffoldState: ScaffoldState
 ) {
+    val webView = rememberWebView()
+    //key1이 여기에 전달하는 객체가 변경이 되었을 때, block이 실행이 됨
+    LaunchedEffect(Unit){
+        viewModel.undoSharedFlow.collectLatest {
+            if(webView.canGoBack()){
+                webView.goBack()
+            } else{
+                //snackbar를 띄우기 위해 scaffoldState가 필요했던 것!
+                scaffoldState.snackbarHostState.showSnackbar("더 이상 뒤로 갈 수 없음")
+            }
+        }
+    }
 
-    //scope를 여기서 생성할 것
-    val scope =  rememberCoroutineScope()
+
+    //key1이 여기에 전달하는 객체가 변경이 되었을 때, block이 실행이 됨
+    LaunchedEffect(Unit){
+        viewModel.redoSharedFlow.collectLatest {
+            if(webView.canGoForward()){
+                webView.goForward()
+            } else{
+                //snackbar를 띄우기 위해 scaffoldState가 필요했던 것!
+                scaffoldState.snackbarHostState.showSnackbar("더 이상 앞으로 갈 수 없음")
+            }
+        }
+    }
+
 
     AndroidView(
         //factory와 update는 coroutineScope가 아님
         //shareflow는 coroutineScope안에서 실행해야함
         modifier = Modifier.fillMaxSize(),
-        factory = {
-                  WebView(it).apply {
-                      settings.javaScriptEnabled = true //가장 많이 하는 설정
-                      webViewClient = WebViewClient()
-                      loadUrl("https://google.com")
-                  }
-        },
+        factory = { webView },
         update = {
             webView -> webView.loadUrl(viewModel.url.value) //naver.com 변경시, 브라우저가 바뀌게됨 (화면 갱신부분)
-
-            scope.launch {
-                //sharedFlow는 collect로 관찰 할 수 있음
-                // 우리는 마지막것만 관찰 할 것이므로 collectLatest를 쓸것임
-                viewModel.undoSharedFlow.collectLatest {
-                    if(webView.canGoBack()){
-                        webView.goBack()
-                    } else{
-                        //snackbar를 띄우기 위해 scaffoldState가 필요했던 것!
-                        scaffoldState.snackbarHostState.showSnackbar("더 이상 뒤로 갈 수 없음")
-                    }
-                }
-            }
-
-            scope.launch {
-                viewModel.redoSharedFlow.collectLatest {
-                    if(webView.canGoForward()){
-                        webView.goForward()
-                    }else{
-                        //snackbar를 띄우기 위해 scaffoldState가 필요했던 것!!!
-                        scaffoldState.snackbarHostState.showSnackbar("더 이상 앞으로 갈 수 없음")
-                    }
-                }
-            }
         },
     )
+}
+
+@Composable
+fun rememberWebView(): WebView {
+    val context = LocalContext.current
+    val webView = remember {
+        WebView(context).apply {
+            settings.javaScriptEnabled = true //가장 많이 하는 설정
+            webViewClient = WebViewClient()
+            loadUrl("https://google.com")
+        }
+    }
+    return webView
 }
 
 
