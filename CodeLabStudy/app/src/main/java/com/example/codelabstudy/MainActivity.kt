@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import com.example.codelabstudy.ui.theme.CodeLabStudyTheme
 import com.example.codelabstudy.home.Home
 import kotlinx.coroutines.CoroutineScope
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CodeLabStudyTheme {
                 Screen(startRoute = NAV_Route.PAGE2.routeName)
+
             }
         }
     }

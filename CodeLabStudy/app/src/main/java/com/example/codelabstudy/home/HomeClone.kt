@@ -2,7 +2,9 @@ package com.example.codelabstudy.home
 
 import android.annotation.SuppressLint
 import android.content.ClipData.Item
+import android.content.Context
 import android.media.Image
+import android.widget.ImageView
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -28,12 +30,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.Coil
+import coil.ImageLoader
+import coil.compose.rememberImagePainter
 import com.example.codelabstudy.Affirmation
 import com.example.codelabstudy.R
 import com.example.codelabstudy.ui.theme.*
+import java.io.File
 
 private enum class TabPage2 {
     Home, Work
@@ -85,47 +92,42 @@ fun PhotoGrid() {
             .height(120.dp)
             .fillMaxWidth(),
     ) {
-//        items(5) { i ->
-//            Image(imageVector = R.string., contentDescription = )
-//            Image(
-//                painter = painterResource(id = R.drawable.image_1),
-//                contentDescription = "",
-//                modifier = Modifier.padding(horizontal = 10.dp)
-//            )
-//        }
-        item {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-//                items(5) { i ->
-//                    Image(painter = painterResource(id = R.drawable.image_1),
-//                        contentDescription = "image1",
-//                        modifier = Modifier.padding(horizontal = 10.dp))
-//                }
-                Image(
-                    painter = painterResource(id = R.drawable.image_1),
-                    contentDescription = "image1",
-                    modifier = Modifier.padding(horizontal = 10.dp)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.image_2),
-                    contentDescription = "image2",
-                    modifier = Modifier.padding(horizontal = 10.dp)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.image_3),
-                    contentDescription = "image3",
-                    modifier = Modifier.padding(horizontal = 10.dp)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.image_4),
-                    contentDescription = "image4",
-                    modifier = Modifier.padding(horizontal = 10.dp)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.image_5),
-                    contentDescription = "image5"
-                )
-            }
+        items(5) { i ->
+            val painter = rememberImagePainter(data = "R.drawable.image_$i.jpg") //이거 질문.. 질문 .. 별표 ..
+            Image(
+                painter = painter,
+                contentDescription = "",
+                modifier = Modifier.padding(horizontal = 10.dp)
+            )
         }
+//        item {
+//            Row(verticalAlignment = Alignment.CenterVertically) {
+//                Image(
+//                    painter = painterResource(id = R.drawable.image_1),
+//                    contentDescription = "image1",
+//                    modifier = Modifier.padding(horizontal = 10.dp)
+//                )
+//                Image(
+//                    painter = painterResource(id = R.drawable.image_2),
+//                    contentDescription = "image2",
+//                    modifier = Modifier.padding(horizontal = 10.dp)
+//                )
+//                Image(
+//                    painter = painterResource(id = R.drawable.image_3),
+//                    contentDescription = "image3",
+//                    modifier = Modifier.padding(horizontal = 10.dp)
+//                )
+//                Image(
+//                    painter = painterResource(id = R.drawable.image_4),
+//                    contentDescription = "image4",
+//                    modifier = Modifier.padding(horizontal = 10.dp)
+//                )
+//                Image(
+//                    painter = painterResource(id = R.drawable.image_5),
+//                    contentDescription = "image5"
+//                )
+//            }
+//        }
     }
 }
 
