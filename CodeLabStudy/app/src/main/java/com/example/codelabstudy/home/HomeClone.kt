@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ClipData.Item
 import android.content.Context
 import android.media.Image
+import android.util.Log
 import android.widget.ImageView
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -83,6 +84,15 @@ fun HomeClone(navController: NavController) {
 
 @Composable
 fun PhotoGrid() {
+
+    val itemsIndexedList: List<Int> = listOf(
+        R.drawable.image_1,
+        R.drawable.image_2,
+        R.drawable.image_3,
+        R.drawable.image_4,
+        R.drawable.image_5
+    )
+
     LazyHorizontalGrid(
         rows = GridCells.Fixed(1),
         contentPadding = PaddingValues(horizontal = 16.dp),
@@ -92,42 +102,43 @@ fun PhotoGrid() {
             .height(120.dp)
             .fillMaxWidth(),
     ) {
-//        items(5) { i ->
-//            val painter = rememberImagePainter(data = "R.drawable.image_$i.jpg") //이거 질문.. 질문 .. 별표 ..
-//            Image(
-//                painter = painter,
-//                contentDescription = "",
-//                modifier = Modifier.padding(horizontal = 10.dp)
-//            )
-//        }
-        item {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Image(
-                    painter = painterResource(id = R.drawable.image_1),
-                    contentDescription = "image1",
-                    modifier = Modifier.padding(horizontal = 10.dp)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.image_2),
-                    contentDescription = "image2",
-                    modifier = Modifier.padding(horizontal = 10.dp)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.image_3),
-                    contentDescription = "image3",
-                    modifier = Modifier.padding(horizontal = 10.dp)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.image_4),
-                    contentDescription = "image4",
-                    modifier = Modifier.padding(horizontal = 10.dp)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.image_5),
-                    contentDescription = "image5"
-                )
-            }
+        items(itemsIndexedList) { item->
+            val painter =  //이거 질문.. 질문 .. 별표 ..
+            Image(
+                painter = painterResource(id = item),
+                contentDescription = "",
+                modifier = Modifier.padding(horizontal = 10.dp)
+            )
         }
+//      2번째 방법
+//        item {
+//            Row(verticalAlignment = Alignment.CenterVertically) {
+//                Image(
+//                    painter = painterResource(id = R.drawable.image_1),
+//                    contentDescription = "image1",
+//                    modifier = Modifier.padding(horizontal = 10.dp)
+//                )
+//                Image(
+//                    painter = painterResource(id = R.drawable.image_2),
+//                    contentDescription = "image2",
+//                    modifier = Modifier.padding(horizontal = 10.dp)
+//                )
+//                Image(
+//                    painter = painterResource(id = R.drawable.image_3),
+//                    contentDescription = "image3",
+//                    modifier = Modifier.padding(horizontal = 10.dp)
+//                )
+//                Image(
+//                    painter = painterResource(id = R.drawable.image_4),
+//                    contentDescription = "image4",
+//                    modifier = Modifier.padding(horizontal = 10.dp)
+//                )
+//                Image(
+//                    painter = painterResource(id = R.drawable.image_5),
+//                    contentDescription = "image5"
+//                )
+//            }
+//        }
     }
 }
 
