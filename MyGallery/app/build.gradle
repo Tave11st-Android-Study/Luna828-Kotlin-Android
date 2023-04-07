@@ -60,4 +60,14 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+
+    //Pager
+    implementation "com.google.accompanist:accompanist-pager:0.19.0"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.19.0"
+
+    //coil
+    implementation "io.coil-kt:coil-compose:1.4.0"
+
+    //ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
 }
