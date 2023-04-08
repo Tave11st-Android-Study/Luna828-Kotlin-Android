@@ -32,14 +32,14 @@ class MainActivity : ComponentActivity() {
             //권한요청
             val launcher =
             // rememberLauncherForActivityResult 사용자 인터랙션에 대한 결과를 처리하기 위해 제공되는 API 중 하나
-                //ActivityResultContracts.RequestPermission() -> 권한 요청 결과를 처리하기 위한 Contract입니다. Contract는 ActivityResult API와 함께 사용됩니다. 이 Contract를 사용하면 권한 요청 시 사용자의 동의 여부에 대한 결과를 처리할 수 있습니다.
+            //ActivityResultContracts.RequestPermission() -> 권한 요청 결과를 처리하기 위한 Contract입니다. Contract는 ActivityResult API와 함께 사용됩니다. 이 Contract를 사용하면 권한 요청 시 사용자의 동의 여부에 대한 결과를 처리할 수 있습니다.
                 rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
                     granted = isGranted
                 }
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                ) == PackageManager.PERMISSION_GRANTED
+
+            //권한이 있는지 체크 코드
+            if (ContextCompat.checkSelfPermission(  this, Manifest.permission.READ_EXTERNAL_STORAGE, //사진을 가지고 오는 것..
+                ) == PackageManager.PERMISSION_GRANTED //권한이 수락되었는지를 묻는 것
             ) {
                 granted = true
             }

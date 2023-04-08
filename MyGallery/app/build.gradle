@@ -47,6 +47,14 @@ android {
 }
 
 dependencies {
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
@@ -65,7 +73,7 @@ dependencies {
     implementation "com.google.accompanist:accompanist-pager:0.19.0"
     implementation "com.google.accompanist:accompanist-pager-indicators:0.19.0"
 
-    //coil
+    //coil -> 네트워크,local의 이미지를 가져올 때 쓰는 것
     implementation "io.coil-kt:coil-compose:1.4.0"
 
     //ViewModel
