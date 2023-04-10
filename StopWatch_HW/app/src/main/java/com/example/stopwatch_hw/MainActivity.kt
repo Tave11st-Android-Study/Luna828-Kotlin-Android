@@ -2,11 +2,11 @@ package com.example.stopwatch_hw
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -18,8 +18,9 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stopwatch_hw.ui.theme.StopWatch_HWTheme
-import java.util.Timer
+import kotlinx.coroutines.*
 
 class MainActivity : ComponentActivity() {
     /*
@@ -31,13 +32,40 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            val viewModel = viewModel<MainViewModel>()
+
+            val min = viewModel.min.value
+            val sec = viewModel.sec.value
+            val mili = viewModel.mili.value
+            val isRunning = viewModel.isRunning.value
+
             StopWatch_HWTheme(true) {
                 //Stop Watch 만들기 과제 (Coroutine or Thread) 만들어서 진행
-                MainPage()
+                MainPage(
+                    min = min,
+                    sec = sec,
+                    mili = mili,
+                    isRunning = isRunning,
+                    onReset = {
+                        CoroutineScope(Dispatchers.Main).launch {
+                            viewModel.reset()
+                        }
+                    },
+                    onPlay_Pause = { running ->
+                        CoroutineScope(Dispatchers.Main).launch {
+                            if (running) {
+                                viewModel.pause()
+                            } else {
+                                viewModel.start()
+                            }
+                        }
+                    }
+                )
             }
         }
     }
 }
+
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -46,7 +74,7 @@ fun MainPage(
     sec: Int,
     mili: Int,
     onReset: () -> Unit,
-    onPlay_Pause: (Boolean) -> Boolean, //True False에 따라서 함수 호출
+    onPlay_Pause: (Boolean) -> Unit, //True False에 따라서 함수 호출
     isRunning: Boolean,
 ) {
     Scaffold() {
@@ -72,13 +100,16 @@ fun MainPage(
                 FloatingActionButton(onClick = onReset, backgroundColor = Color.Red) {
                     Image(painter = painterResource(id = R.drawable.baseline_square_24), contentDescription = "", colorFilter = ColorFilter.tint(Color.Black))
                 }
-                FloatingActionButton(onClick = {onPlay_Pause(isRunning)}, backgroundColor = Color.Green) {
+                FloatingActionButton(onClick = { onPlay_Pause(isRunning) }, backgroundColor = Color.Green) {
                     Image(
-                        painter = painterResource(id =
-                        if(isRunning) R.drawable.baseline_play_arrow_24
-                        else R.drawable.baseline_pause_24),
+                        painter = painterResource(
+                            id =
+                            if (isRunning) R.drawable.baseline_pause_24
+                            else R.drawable.baseline_play_arrow_24
+                        ),
                         contentDescription = "",
-                        colorFilter = ColorFilter.tint(Color.Black))
+                        colorFilter = ColorFilter.tint(Color.Black)
+                    )
                 }
 
             }
