@@ -42,6 +42,7 @@ class MainViewModel : ViewModel() {
 
     fun reset() {
         timerTask?.cancel()
+        time = 0
         _isRunning.value = false
         _min.value = 0 //초기화 시켜주기
         _sec.value = 0
