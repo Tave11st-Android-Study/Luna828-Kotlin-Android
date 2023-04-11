@@ -37,13 +37,14 @@ class MainViewModel : ViewModel() {
         _isRunning.value = true
         timerTask = timer(period = 10) {
             time++
-            _min.value = _sec.value / 100
-            _sec.value = time / 100 //100이 넘고.. 초기화 0으로 하는법..?은?
+            val tmpTime = time / 100
+            _min.value = tmpTime / 60
+            _sec.value = tmpTime - (_min.value * 60)
             _mili.value = time % 100
-            if(_sec.value == 1 && _mili.value == 99){
+            //Log.d("로그","time : ${time}, sec : ${(time / 100)}")
+            if(_min.value == 1 && _sec.value == 59 && _mili.value == 99){
                 // 99:99:99가 되었을 때, pause()를 호출하고 Toast를 띄우면될 듯?
-                _isRunning.value = false
-                timerTask?.cancel()
+                pause()
                 CoroutineScope(Dispatchers.Main).launch {
                     //Toast는 UI 스레드가 아닌 스레드에서 토스트 창을 띄우려고 하면
                     // can't toast on a thread that has not called looper.prepare() 에러가 나옴..
