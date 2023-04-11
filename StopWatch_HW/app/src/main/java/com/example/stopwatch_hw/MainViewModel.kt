@@ -41,7 +41,6 @@ class MainViewModel : ViewModel() {
             _min.value = tmpTime / 60
             _sec.value = tmpTime - (_min.value * 60)
             _mili.value = time % 100
-            //Log.d("로그","time : ${time}, sec : ${(time / 100)}")
             if(_min.value == 1 && _sec.value == 59 && _mili.value == 99){
                 // 99:99:99가 되었을 때, pause()를 호출하고 Toast를 띄우면될 듯?
                 pause()

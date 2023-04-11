@@ -1,6 +1,7 @@
 package com.example.stopwatch_hw
 
 import android.annotation.SuppressLint
+import android.content.ServiceConnection
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stopwatch_hw.ui.theme.StopWatch_HWTheme
 import kotlinx.coroutines.*
+import java.nio.file.WatchService
 
 class MainActivity : ComponentActivity() {
     /*
@@ -87,9 +89,7 @@ fun MainPage(
             verticalArrangement = Arrangement.Center
         ) {
             Row(verticalAlignment = Alignment.Bottom) {
-                Text(text = "$min:", fontSize = 100.sp) //분
-                Text(text = "$sec:", fontSize = 100.sp) //초
-                Text(text = "$mili", fontSize = 100.sp) //밀리초
+                Text(text = "$min:$sec.$mili", fontSize = 100.sp) //분
             }
             Spacer(modifier = Modifier.height(30.dp))
             Row(
