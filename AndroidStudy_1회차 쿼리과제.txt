@@ -2,17 +2,17 @@ CREATE DATABASE Android_Team; //데이터베이스 생성
 
 //Student 테이블 생성
 CREATE TABLE STUDENT(  
-	ST_ID INT PRIMARY KEY,
+	ST_ID INT PRIMARY KEY AUTO_INCREMENT,
 	ST_NAME VARCHAR(20) NOT NULL,
 	HIRE_YMD DATE NOT NULL,
 	TL_CODE INT NOT NULL
 );
 
 //Student 데이터 넣기
-INSERT INTO `student`(`ST_ID`,`ST_NAME`,`HIRE_YMD`,`TL_CODE`) VALUES ('1','kangyuri1114','2023-03-18','101');
-INSERT INTO `student`(`ST_ID`,`ST_NAME`,`HIRE_YMD`,`TL_CODE`) VALUES ('2','seogaeun','2023-03-18','101');
-INSERT INTO `student`(`ST_ID`,`ST_NAME`,`HIRE_YMD`,`TL_CODE`) VALUES ('3','sxmvx','2023-03-18','102');
-INSERT INTO `student`(`ST_ID`,`ST_NAME`,`HIRE_YMD`,`TL_CODE`) VALUES ('4','arinming','2023-03-18','102');
+INSERT INTO `student`(`ST_NAME`,`HIRE_YMD`,`TL_CODE`) VALUES ('kangyuri1114','2023-03-18','101');
+INSERT INTO `student`(`ST_NAME`,`HIRE_YMD`,`TL_CODE`) VALUES ('seogaeun','2023-03-18','101');
+INSERT INTO `student`(`ST_NAME`,`HIRE_YMD`,`TL_CODE`) VALUES ('sxmvx','2023-03-18','102');
+INSERT INTO `student`(`ST_NAME`,`HIRE_YMD`,`TL_CODE`) VALUES ('arinming','2023-03-18','102');
 
 //TEAM_LEADER 테이블 생성
 CREATE TABLE team_leader(
