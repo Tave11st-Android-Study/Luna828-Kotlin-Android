@@ -2,6 +2,7 @@ package com.example.stopwatch_hw
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,6 +42,7 @@ class MainActivity : ComponentActivity() {
             val isRunning = viewModel.isRunning.value
 
             StopWatch_HWTheme(true) {
+                val context = LocalContext.current
                 //Stop Watch 만들기 과제 (Coroutine or Thread) 만들어서 진행
                 MainPage(
                     min = min,
@@ -56,7 +59,7 @@ class MainActivity : ComponentActivity() {
                             if (running) {
                                 viewModel.pause()
                             } else {
-                                viewModel.start()
+                                viewModel.start(context)
                             }
                         }
                     }
