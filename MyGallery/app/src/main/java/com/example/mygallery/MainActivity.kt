@@ -22,26 +22,26 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberImagePainter
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.HorizontalPagerIndicator
-import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.pager.*
+import kotlin.math.absoluteValue
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
+            val viewModel = viewModel<MainViewModel>()
             var granted by remember { mutableStateOf(false) }
             //권한요청
             val launcher =
-            // rememberLauncherForActivityResult 사용자 인터랙션에 대한 결과를 처리하기 위해 제공되는 API 중 하나
+                // rememberLauncherForActivityResult 사용자 인터랙션에 대한 결과를 처리하기 위해 제공되는 API 중 하나
                 //ActivityResultContracts.RequestPermission() -> 권한 요청 결과를 처리하기 위한 Contract입니다. Contract는 ActivityResult API와 함께 사용됩니다. 이 Contract를 사용하면 권한 요청 시 사용자의 동의 여부에 대한 결과를 처리할 수 있습니다.
                 rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
                     granted = isGranted
@@ -55,7 +55,8 @@ class MainActivity : ComponentActivity() {
                 granted = true
             }
             if (granted) {
-                Text(text = "권한 허용 됨")
+                viewModel.fetchPhotos()
+                HomeScreen(photoUris = viewModel.PhotoUris.value)
             } else {
                 PermissionRequestScreen {
                     launcher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -140,7 +141,29 @@ fun HomeScreen(photoUris: List<Uri>) {
                 .padding(16.dp)
                 .fillMaxSize(),
         ) { pageIndex ->
-            Card() {
+            Card(
+                modifier = Modifier
+                    .graphicsLayer {
+                        //화면에 그려줄 때 그래픽 요소를 수동으로 지정할 수 있음
+                        val pageOffset = calculateCurrentOffsetForPage(pageIndex).absoluteValue //이 코드를 통해 계산이됨
+
+                        lerp(
+                            start = 0.85f,
+                            stop = 1f,
+                            fraction = 1f - pageOffset.coerceIn(0f, 1f),
+                        ).also { scale ->
+                            //가로 세로
+                            scaleX = scale
+                            scaleY = scale
+                        }
+
+                        alpha = lerp(
+                            start = 0.5f,
+                            stop = 1f,
+                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                        )
+                    }
+            ) {
                 Image(
                     painter = rememberImagePainter(
                         //coil에서 제공함
@@ -161,3 +184,6 @@ fun HomeScreen(photoUris: List<Uri>) {
         )
     }
 }
+
+private fun lerp(start: Float, stop: Float, fraction: Float): Float =
+    (1 - fraction) * start + fraction * stop
