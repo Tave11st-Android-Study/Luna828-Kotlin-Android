@@ -3,8 +3,6 @@ package com.example.stopwatch_hw
 import android.annotation.SuppressLint
 import android.content.ServiceConnection
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -34,54 +32,24 @@ class MainActivity : ComponentActivity() {
     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
-            val viewModel = viewModel<MainViewModel>()
-
-            val min = viewModel.min.value
-            val sec = viewModel.sec.value
-            val mili = viewModel.mili.value
-            val isRunning = viewModel.isRunning.value
-
             StopWatch_HWTheme(true) {
-                val context = LocalContext.current
                 //Stop Watch 만들기 과제 (Coroutine or Thread) 만들어서 진행
-                MainPage(
-                    min = min,
-                    sec = sec,
-                    mili = mili,
-                    isRunning = isRunning,
-                    onReset = {
-                        CoroutineScope(Dispatchers.Main).launch {
-                            viewModel.reset()
-                        }
-                    },
-                    onPlay_Pause = { running ->
-                        CoroutineScope(Dispatchers.Main).launch {
-                            if (running) {
-                                viewModel.pause()
-                            } else {
-                                viewModel.start(context)
-                            }
-                        }
-                    }
-                )
+                MainPage()
             }
         }
     }
 }
 
-
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainPage(
-    min: Int,
-    sec: Int,
-    mili: Int,
-    onReset: () -> Unit,
-    onPlay_Pause: (Boolean) -> Unit, //True False에 따라서 함수 호출
-    isRunning: Boolean,
-) {
+fun MainPage() {
+    val context = LocalContext.current
+    val viewModel = viewModel<MainViewModel>()
+    val min = viewModel.min.value
+    val sec = viewModel.sec.value
+    val mili = viewModel.mili.value
+    val isRunning = viewModel.isRunning.value
     Scaffold() {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -100,10 +68,30 @@ fun MainPage(
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                FloatingActionButton(onClick = onReset, backgroundColor = Color.Red) {
-                    Image(painter = painterResource(id = R.drawable.baseline_square_24), contentDescription = "", colorFilter = ColorFilter.tint(Color.Black))
+                FloatingActionButton(
+                    onClick = {
+                        CoroutineScope(Dispatchers.Main).launch {
+                            viewModel.reset()
+                        }
+                    },
+                    backgroundColor = Color.Red
+                )
+                {
+                    Image(
+                        painter = painterResource(id = R.drawable.baseline_square_24),
+                        contentDescription = "",
+                        colorFilter = ColorFilter.tint(Color.Black)
+                    )
                 }
-                FloatingActionButton(onClick = { onPlay_Pause(isRunning) }, backgroundColor = Color.Green) {
+                FloatingActionButton(onClick = {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        if (isRunning) {
+                            viewModel.pause()
+                        } else {
+                            viewModel.start(context)
+                        }
+                    }
+                }, backgroundColor = Color.Green) {
                     Image(
                         painter = painterResource(
                             id =
@@ -118,5 +106,4 @@ fun MainPage(
             }
         }
     }
-
 }
