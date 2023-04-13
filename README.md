@@ -16,5 +16,22 @@
   
   - StopWatch
   
+  TAVE_Android 스터디 및 스터디 과제
+  
+  - AndroidStudy_1회차 쿼리 과제
+  
+  - StopWatch_HW 
+  
+  나 홀로 UI 스터디
+  
+  - CodeLabStudy
+  
+  - JetPack 
+    ```
+    //JetPack Compose UI 연습
+    ```
+  
+  
+  
   
 
