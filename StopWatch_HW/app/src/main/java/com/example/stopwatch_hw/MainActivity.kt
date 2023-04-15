@@ -68,6 +68,18 @@ fun MainPage(context: Context) {
             min.value = tmpTime / 60
             sec.value = tmpTime - (min.value * 60)
             mili.value = time % 100
+
+            CoroutineScope(Dispatchers.Main).launch {
+                if (min.value == 0 && sec.value == 3 && mili.value == 0) {
+                    isRunning = false
+                    timerTask?.cancel()
+                    Toast.makeText(
+                        context,
+                        "실행을 자동으로 중지합니다",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
@@ -91,23 +103,11 @@ fun MainPage(context: Context) {
                 isRunning = isRunning,
                 onReset = { reset() },
                 onPlayPause = { running ->
-                    CoroutineScope(Dispatchers.Main).launch {
-                        if (running) {
-                            pause()
-                        } else {
-                            start()
-                            //ㅇ ㅏ.. 
-                            if (min.value == 0 && sec.value == 3 && mili.value == 0) {
-                                pause()
-                                Toast.makeText(
-                                    context,
-                                    "실행을 자동으로 중지합니다",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
+                    if (running) {
+                        pause()
+                    } else {
+                        start()
                     }
-
                 }
             )
         }
