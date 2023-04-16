@@ -1,22 +1,20 @@
 package com.example.tave_android
 
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.annotation.RequiresApi
+import androidx.room.Room
+import com.example.tave_android.Dao.memoDataBase
 import com.example.tave_android.databinding.ActivityMainBinding
 import com.example.tave_android.permission.PermissionActivity
 import kotlinx.coroutines.*
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private lateinit var memoDB: memoDataBase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +39,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }.join()
         }
+
+        //Room ORM 사용방법
+        memoDB = Room.databaseBuilder(this, memoDataBase::class.java, "room_memo")
+            .allowMainThreadQueries()
+            .build()
     }
 
     override fun onClick(view: View?) {
