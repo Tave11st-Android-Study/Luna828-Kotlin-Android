@@ -7,6 +7,8 @@ import com.example.todolist.domain.model.Todo
 import com.example.todolist.domain.repository.TodoRepository
 import kotlinx.coroutines.flow.Flow
 
+// 실질적으로 data_source에 있는 파일들을 활용해서 data를 제공하는 기능을 구현
+
 class TodoRepositoryImpl(application: Application) : TodoRepository {
     //TodoRepository를 구현하고 있는 구현체를 만들것
     private val db = Room.databaseBuilder(
